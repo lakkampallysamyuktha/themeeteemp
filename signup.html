@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKLY · Sign Up</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #e50914;
+            --color-primary-dark: #b80710;
+            --color-primary-light: rgba(229, 9, 20, 0.2);
+            --color-primary-glow: rgba(229, 9, 20, 0.25);
+            --color-bg: #050505;
+            --color-bg-card: rgba(10, 10, 10, 0.8);
+            --color-white: #FFFFFF;
+            --color-text: #FFFFFF;
+            --color-text-muted: #aaaaaa;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.8);
+            --shadow-glow: 0 0 60px rgba(229, 9, 20, 0.08);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --tr: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: var(--color-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+            color: var(--color-text);
+        }
+
+        /* ── Full‑screen Background Image ── */
+        .bg-image {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image: url('Images/mandalorine.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: brightness(0.3) saturate(1.1);
+            transform: scale(1.02);
+            animation: bgSlowZoom 28s ease-in-out infinite alternate;
+        }
+        @keyframes bgSlowZoom {
+            0% { transform: scale(1.02) translate(0, 0); }
+            100% { transform: scale(1.10) translate(-0.5%, -0.5%); }
+        }
+
+        .bg-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(ellipse at 50% 50%, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.9) 100%);
+            pointer-events: none;
+        }
+
+        /* ── Animated BG Orbs ── */
+        .bg-orbs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.25;
+            animation: orbFloat 18s ease-in-out infinite alternate;
+        }
+        .bg-orb.orb-1 {
+            width: 500px;
+            height: 500px;
+            top: -200px;
+            right: -150px;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.15), transparent 70%);
+            animation-delay: 0s;
+        }
+        .bg-orb.orb-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            left: -120px;
+            background: radial-gradient(circle, rgba(229, 9, 20, 0.10), transparent 70%);
+            animation-delay: 6s;
+        }
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(40px, -30px) scale(1.1); }
+            100% { transform: translate(-30px, 40px) scale(0.9); }
+        }
+
+        /* ── Wrapper Container ── */
+        .signup-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1080px;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            background: var(--color-bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            overflow: hidden;
+        }
+
+        /* ── Top‑Left Home Link ── */
+        .home-link {
+            position: fixed;
+            top: 28px;
+            left: 28px;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px 10px 14px;
+            background: rgba(15, 15, 15, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--tr);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.3px;
+        }
+        .home-link i {
+            font-size: 14px;
+            color: var(--color-primary);
+        }
+        .home-link:hover {
+            background: rgba(229, 9, 20, 0.15);
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-2px);
+            color: var(--color-white);
+        }
+
+        /* ─── LEFT SIDE CONTENT ─── */
+        .signup-left {
+            padding: 48px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: rgba(229, 9, 20, 0.02);
+            border-right: 1px solid var(--color-border);
+        }
+        .signup-left .brand-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(229, 9, 20, 0.12);
+            border: 1px solid rgba(229, 9, 20, 0.2);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            width: fit-content;
+        }
+        .signup-left .brand-tag .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+        }
+        .signup-left h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(32px, 3.8vw, 48px);
+            font-weight: 900;
+            color: var(--color-text);
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+        .signup-left h1 span {
+            color: var(--color-primary);
+        }
+        .signup-left .subtitle {
+            color: var(--color-text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .signup-left .features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .signup-left .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--color-text);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .signup-left .feature-item .feat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(229, 9, 20, 0.12);
+            border: 1px solid rgba(229, 9, 20, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--color-primary);
+            font-size: 16px;
+        }
+        .signup-left .trust-badge {
+            margin-top: 36px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .signup-left .trust-badge .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-text-muted);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .signup-left .trust-badge .trust-item i {
+            color: var(--color-primary);
+            font-size: 14px;
+        }
+
+        /* ─── RIGHT SIDE FORM ─── */
+        .signup-right {
+            padding: 40px 40px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .signup-right .form-header {
+            margin-bottom: 24px;
+        }
+        .signup-right .form-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--color-text);
+            letter-spacing: -0.3px;
+        }
+        .signup-right .form-header p {
+            color: var(--color-text-muted);
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .field-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text);
+            letter-spacing: 0.3px;
+        }
+        .field-group label .required {
+            color: var(--color-primary);
+            margin-left: 2px;
+        }
+        .input-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .input-wrap>i {
+            position: absolute;
+            left: 12px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .input-wrap input,
+        .input-wrap select {
+            width: 100%;
+            padding: 10px 38px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            color: var(--color-text);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            transition: var(--tr);
+            outline: none;
+        }
+        .input-wrap select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        .input-wrap select option {
+            background: #111;
+            color: #fff;
+        }
+        .input-wrap input:focus,
+        .input-wrap select:focus {
+            border-color: var(--color-primary);
+            background: rgba(229, 9, 20, 0.08);
+            box-shadow: 0 0 0 3px var(--color-primary-glow);
+        }
+        .input-wrap input::placeholder {
+            color: #555;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            font-size: 15px;
+            padding: 4px;
+            z-index: 2;
+        }
+        .toggle-pw:hover {
+            color: var(--color-primary);
+        }
+
+        /* Password strength bar */
+        .pw-strength {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            margin-top: 6px;
+            overflow: hidden;
+        }
+        .pw-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 4px;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+        .pw-label {
+            font-size: 10px;
+            color: var(--color-text-muted);
+            margin-top: 3px;
+            display: block;
+            font-weight: 500;
+        }
+        .error-msg {
+            font-size: 11px;
+            color: #ff4d4d;
+            margin-top: 3px;
+        }
+
+        .error-message {
+            background: rgba(229, 9, 20, 0.12);
+            color: var(--color-primary);
+            padding: 10px 14px;
+            font-size: 12px;
+            border-radius: var(--radius-sm);
+            display: none;
+            border-left: 3px solid var(--color-primary);
+        }
+        .error-message.show { display: block; }
+
+        .btn-submit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border: none;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            transition: var(--tr);
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
+            position: relative;
+            overflow: hidden;
+            margin-top: 4px;
+        }
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+        .btn-submit:hover::before { transform: translateX(100%); }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(229, 9, 20, 0.4);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 18px;
+            color: var(--color-text-muted);
+            font-size: 13px;
+        }
+        .form-footer a {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .form-footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 900px) {
+            .signup-wrapper { grid-template-columns: 1fr; max-width: 520px; }
+            .signup-left { padding: 32px 28px 24px; border-right: none; border-bottom: 1px solid var(--color-border); text-align: center; }
+            .signup-left .brand-tag { margin: 0 auto 20px; }
+            .signup-left .features { align-items: center; }
+            .signup-left .trust-badge { justify-content: center; }
+            .signup-right { padding: 28px 24px 24px; }
+            .home-link { top: 16px; left: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 80px 12px 24px; align-items: flex-start; }
+            .signup-wrapper { border-radius: 12px; }
+            .signup-left { padding: 24px 16px 20px; }
+            .signup-right { padding: 20px 16px 20px; }
+            .field-row { grid-template-columns: 1fr; gap: 12px; }
+            .home-link { position: absolute; top: 12px; left: 12px; }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { display: inline-block; animation: spin 0.7s linear infinite; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+    <div class="bg-orbs">
+        <span class="bg-orb orb-1"></span>
+        <span class="bg-orb orb-2"></span>
+    </div>
+
+    <!-- HOME LINK -->
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+    </a>
+
+    <div class="signup-wrapper">
+        <!-- LEFT PANEL -->
+        <div class="signup-left">
+            <div class="brand-tag">
+                <span class="dot"></span>
+                Instant Access
+            </div>
+            <h1>Start your<br /><span>STACKLY</span> journey</h1>
+            <p class="subtitle">
+                Unlock thousands of titles, customized playlist metrics, offline downloads, and multi-profile setups.
+            </p>
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feat-icon"><i class="fas fa-tv"></i></span>
+                    Stream 4K Ultra-HD & HDR Content
+                </div>
+                <div class="feature-item">
+                    <span class="feat-icon"><i class="fas fa-user-friends"></i></span>
+                    Sleek Multi-profile Switchers
+                </div>
+                <div class="feature-item">
+                    <span class="feat-icon"><i class="fas fa-shield-alt"></i></span>
+                    Secure Ad-free Experience
+                </div>
+            </div>
+            <div class="trust-badge">
+                <span class="trust-item"><i class="fas fa-check-circle"></i> 10k+ movies</span>
+                <span class="trust-item"><i class="fas fa-check-circle"></i> 99% uptime</span>
+                <span class="trust-item"><i class="fas fa-check-circle"></i> 24/7 helpline</span>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div class="signup-right">
+            <div class="form-header">
+                <h2>Create account</h2>
+                <p>Join the STACKLY Streaming Network</p>
+            </div>
+            <form class="form-fields" id="signupForm" novalidate>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="firstName">First name <span class="required">*</span></label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="firstName" placeholder="First Name" required />
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label for="lastName">Last name</label>
+                        <div class="input-wrap">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="lastName" placeholder="Last Name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="signupEmail">Email address <span class="required">*</span></label>
+                    <div class="input-wrap">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="signupPassword">Password <span class="required">*</span></label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupPassword" placeholder="Create a password" required />
+                        <button type="button" class="toggle-pw" id="togglePw" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye" id="pwIcon"></i>
+                        </button>
+                    </div>
+                    <div class="pw-strength"><div class="pw-bar" id="pwBar"></div></div>
+                    <span class="pw-label" id="pwLabel">Strength: None</span>
+                </div>
+
+                <div class="field-group">
+                    <label for="confirmPassword">Confirm password <span class="required">*</span></label>
+                    <div class="input-wrap">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirm password" required />
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="roleSelect">Account role <span class="required">*</span></label>
+                    <div class="input-wrap">
+                        <i class="fas fa-tv"></i>
+                        <select id="roleSelect" required>
+                            <option value="">Select role</option>
+                            <option value="viewer">Viewer – Stream movies & TV shows</option>
+                            <option value="admin">Admin – Full catalog management access</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="error-message" id="formError"></div>
+
+                <button type="submit" class="btn-submit" id="signupBtn">
+                    <span>Create Account</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <p class="form-footer">
+                Already have an account? <a href="login.html">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+            const form = document.getElementById('signupForm');
+            const firstNameInput = document.getElementById('firstName');
+            const emailInput = document.getElementById('signupEmail');
+            const passwordInput = document.getElementById('signupPassword');
+            const confirmInput = document.getElementById('confirmPassword');
+            const roleSelect = document.getElementById('roleSelect');
+            const togglePwBtn = document.getElementById('togglePw');
+            const pwIcon = document.getElementById('pwIcon');
+            const pwBar = document.getElementById('pwBar');
+            const pwLabel = document.getElementById('pwLabel');
+            const errorEl = document.getElementById('formError');
+            const submitBtn = document.getElementById('signupBtn');
+
+            togglePwBtn.addEventListener('click', function() {
+                const isText = passwordInput.type === 'text';
+                passwordInput.type = isText ? 'password' : 'text';
+                pwIcon.className = isText ? 'fas fa-eye' : 'fas fa-eye-slash';
+            });
+
+            // Password strength checks
+            passwordInput.addEventListener('input', function() {
+                const val = passwordInput.value;
+                let strength = 0;
+                if (val.length > 5) strength += 25;
+                if (/[A-Z]/.test(val)) strength += 25;
+                if (/[0-9]/.test(val)) strength += 25;
+                if (/[^A-Za-z0-9]/.test(val)) strength += 25;
+
+                pwBar.style.width = strength + '%';
+                if (strength <= 25) {
+                    pwBar.style.background = '#ff4d4d';
+                    pwLabel.textContent = 'Strength: Weak';
+                } else if (strength <= 75) {
+                    pwBar.style.background = '#ff9900';
+                    pwLabel.textContent = 'Strength: Moderate';
+                } else {
+                    pwBar.style.background = '#2ecc71';
+                    pwLabel.textContent = 'Strength: Strong';
+                }
+            });
+
+            function showError(msg) {
+                errorEl.textContent = msg;
+                errorEl.classList.add('show');
+                submitBtn.innerHTML = '<span>Create Account</span><i class="fas fa-arrow-right"></i>';
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                errorEl.classList.remove('show');
+
+                const first = firstNameInput.value.trim();
+                const email = emailInput.value.trim();
+                const pw = passwordInput.value;
+                const confirmPw = confirmInput.value;
+                const role = roleSelect.value;
+
+                if (!first) return showError('First name is required');
+                if (!email || !email.includes('@')) return showError('Enter a valid email');
+                if (pw.length < 6) return showError('Password must be at least 6 characters');
+                if (pw !== confirmPw) return showError('Passwords do not match');
+                if (!role) return showError('Please select a role');
+
+                // Save to local storage
+                localStorage.setItem('stackly_user', JSON.stringify({
+                    email: email,
+                    username: first,
+                    role: role,
+                    remember: true
+                }));
+
+                submitBtn.innerHTML = '<i class="fas fa-circle-notch spinner"></i> Setting up...';
+
+                setTimeout(function() {
+                    window.location.href = 'login.html';
+                }, 900);
+            });
+
+            // Clear form when navigating back to this page
+            window.addEventListener('pageshow', function(event) {
+                form.reset();
+                pwBar.style.width = '0%';
+                pwBar.style.background = 'transparent';
+                pwLabel.textContent = 'Strength: None';
+                submitBtn.innerHTML = '<span>Create Account</span><i class="fas fa-arrow-right"></i>';
+                errorEl.classList.remove('show');
+            });
+        })();
+    </script>
+</body>
+</html>

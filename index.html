@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly | Premium OTT Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      @media (max-width: 767px) {
+        /* Fix Hero Heights */
+        .hero-showcase, .hero-two-column, .hero { height: auto !important; min-height: 0 !important; padding-top: 130px !important; padding-bottom: 20px !important; }
+        .hero-showcase .container, .hero-two-column .container, .hero .container { height: auto !important; flex-direction: column !important; gap: 1rem !important; }
+        .hero-content-wrapper, .hero-text-col, .hero-right-media, .hero-poster-col { width: 100% !important; min-width: 0 !important; flex: none !important; margin-top: 20px !important; }
+        .hero-right-media, .hero-poster-col { display: none !important; }
+        
+        /* Fix Swiper overlapping bugs */
+        .swiper { max-width: 100vw !important; overflow: hidden !important; }
+        .swiper-wrapper { max-width: none !important; overflow: visible !important; }
+        
+        /* Reduce spacing */
+        section { padding: 1.5rem 0 !important; overflow: hidden !important; }
+        #filterSection { padding: 0.5rem 0 !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <!-- Cinematic Preloader -->
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;">
+        <div class="preloader-content" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div class="preloader-logo" style="font-size: 4rem; font-weight: 900; color: #E50914; letter-spacing: -2px; animation: logoBeat 1.8s infinite alternate ease-in-out;">Stackly<span style="color:white;">.</span></div>
+            <div class="preloader-bar" style="width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; position: relative;">
+                <div class="preloader-progress" style="width: 0%; height: 100%; background: #E50914; box-shadow: 0 0 10px #E50914; animation: fillBar 1.6s forwards cubic-bezier(0.1, 0.8, 0.1, 1);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo" style="display:flex; align-items:center;">
+                <img src="Images/logo-removebg-preview.webp" style="height: 60px; width: auto; max-width: 190px; object-fit: contain; filter: brightness(0) saturate(100%) invert(14%) sepia(87%) saturate(6288%) hue-rotate(354deg) brightness(92%) contrast(110%);" alt="Stackly Logo">
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                </ul>
+            </nav>     
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="404.html" aria-label="Search" style="color: white; font-size: 1.2rem; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-red)'" onmouseout="this.style.color='white'"><i class="fas fa-search"></i></a>
+                    <a href="login.html" class="btn-primary" style="padding: 0.5rem 1.5rem; background: #E50914; color: white; border-radius: 4px; font-weight: bold; text-decoration: none;">Login</a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="series.html">Series</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="mylist.html">My List</a></li>
+            <li><a href="login.html" class="mobile-login-btn">Login</a></li>
+        </ul>
+    </div>
+    <!-- 1. Cinematic Hero Slider -->
+    <section class="hero-showcase" style="height: 100vh; min-height: 800px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; background: #050505; padding-top: 100px;">
+        <!-- Background Swiper (crossfade) -->
+        <div class="swiper heroBgSwiper" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="Images/stranger things.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Stranger Things"></div>
+                <div class="swiper-slide"><img src="Images/mandalorine.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="The Mandalorian"></div>
+                <div class="swiper-slide"><img src="Images/godlza vs kong.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Godzilla vs. Kong"></div>
+                <div class="swiper-slide"><img src="Images/hero succssioon.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Succession"></div>
+                <div class="swiper-slide"><img src="Images/BREAKING BAD.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Breaking Bad"></div>
+            </div>
+            <!-- Gradient overlay for text readability -->
+            <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.15) 100%); z-index:2;"></div>
+        </div>
+
+        <div class="container" style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: 1300px; margin: 0 auto; gap: 2rem;">
+            
+            <!-- Left Column: Hero Content -->
+            <div style="flex: 1; max-width: 650px;">
+                <div class="swiper heroContentSwiper" style="width: 100%; overflow: hidden;">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1: Stranger Things -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Horror <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Mystery</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Stranger Things</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.6 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 4 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 2: Mandalorian -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Adventure</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">The Mandalorian</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.7 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 3 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">The travels of a lone bounty hunter in the outer reaches of the galaxy, far from the authority of the New Republic.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 3: Godzilla vs Kong -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Thriller</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Godzilla vs. Kong</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">6.3 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 1 h : 53 min</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">The epic next chapter in the cinematic Monsterverse pits two of the greatest icons in motion picture history against each other - the fearsome Godzilla and the mighty Kong - with humanity caught in the balance.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 4: Succession -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Drama <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Corporate</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Succession</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.9 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 4 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">The Roy family is known for controlling the biggest media and entertainment company in the world. However, their world changes when their father steps down.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 5: Breaking Bad -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Crime <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Drama <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Thriller</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Breaking Bad</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">9.5 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 5 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine to secure his family's future.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Thumbnail Selector Swiper -->
+            <div class="hero-right-media" style="width: 40%; min-width: 0; z-index: 10; display: flex; align-items: center; gap: 1rem; flex-shrink: 0; align-self: flex-end; padding-bottom: 80px;">
+                <div class="custom-hero-arrow prev" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.3s; color: white; flex-shrink: 0;"><i class="fas fa-chevron-left"></i></div>
+                
+                <div class="swiper heroThumbSwiper" style="width: 100%; overflow: hidden; padding: 10px 0; margin-top: -10px; margin-bottom: -10px;">
+                    <div class="swiper-wrapper">
+                        <!-- Thumb 1 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/stranger things.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Stranger Things">
+                            </div>
+                        </div>
+                        <!-- Thumb 2 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/mandalorine.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="The Mandalorian">
+                            </div>
+                        </div>
+                        <!-- Thumb 3 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/godlza vs kong.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Godzilla vs Kong">
+                            </div>
+                        </div>
+                        <!-- Thumb 4 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/hero succssioon.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Succession">
+                            </div>
+                        </div>
+                        <!-- Thumb 5 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/BREAKING BAD.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Breaking Bad">
+                            </div>
+                        </div>
+                        <!-- DUPLICATES FOR INFINITE LOOP FIX -->
+                        <!-- Thumb 6 (Copy of 1) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/stranger things.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Stranger Things">
+                            </div>
+                        </div>
+                        <!-- Thumb 7 (Copy of 2) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/mandalorine.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="The Mandalorian">
+                            </div>
+                        </div>
+                        <!-- Thumb 8 (Copy of 3) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/godlza vs kong.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Godzilla vs Kong">
+                            </div>
+                        </div>
+                        <!-- Thumb 9 (Copy of 4) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/hero succssioon.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Succession">
+                            </div>
+                        </div>
+                        <!-- Thumb 10 (Copy of 5) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/BREAKING BAD.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Breaking Bad">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="custom-hero-arrow next" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.3s; color: white; flex-shrink: 0;"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- Top 10 Movies to Watch -->
+    <section class="top10-section" style="padding: 5rem 0; overflow: visible; background: var(--bg-color); position: relative;">
+        <h2 class="section-title">Top 10 Movies to Watch</h2>
+        <div class="container" style="position: relative;">
+            <div class="swiper top10Swiper" style="overflow: visible; padding: 20px 0 40px 0;">
+                <div class="swiper-wrapper">
+                    <!-- Card 1 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #E50914; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/stranger things.webp" class="cinematic-img" alt="Stranger Things">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Stranger Things</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">1</div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #0063e5; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/mandalorine.webp" class="cinematic-img" alt="The Mandalorian">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">The Mandalorian</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">2</div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #ff9900; color: black; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/the boys.webp" class="cinematic-img" alt="The Boys">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">The Boys</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">3</div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #E50914; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/DeadPOOL2.webp" class="cinematic-img" alt="DeadPOOL 2">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">DeadPOOL 2</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">4</div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #0063e5; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/loki.webp" class="cinematic-img" alt="Loki">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Loki</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">5</div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #E50914; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/SPIDER MAN.webp" class="cinematic-img" alt="spider man">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">SPIDER MAN</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">6</div>
+                        </div>
+                    </div>
+                    <!-- Card 7 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #ff9900; color: black; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/Hacksaw ridge.webp" class="cinematic-img" alt="Reacher">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Hacksaw Ridge</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">7</div>
+                        </div>
+                    </div>
+                    <!-- Card 8 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #0063e5; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/wadevision (1).webp" class="cinematic-img" alt="WandaVision">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">WandaVision</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">8</div>
+                        </div>
+                    </div>
+                    <!-- Card 9 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #E50914; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/BREAKING BAD.webp" class="cinematic-img" alt="Breaking Bad">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Breaking Bad</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number">9</div>
+                        </div>
+                    </div>
+                    <!-- Card 10 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card top10-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="top10-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #0063e5; color: white; font-weight: bold; font-size: 9px; border-radius: 2px; z-index: 10;">STACKLY</div>
+                                <img src="Images/hero succssioon.webp" class="cinematic-img" alt="Succession">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Succession</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                            <div class="top10-number" style="right: -15px;">10</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next" style="color: white; transform: translateY(-20px);"></div>
+                <div class="swiper-button-prev" style="color: white; transform: translateY(-20px);"></div>
+            </div>
+        </div>
+    </section>
+
+
+   <!-- 2. Available on Subscription -->
+<section class="subscription-section" style="padding: 5rem 0;">
+    <h2 class="section-title">Available on Subscription</h2>
+
+    <div class="container">
+        <div class="swiper trendingSwiper">
+
+            <div class="swiper-wrapper">
+
+                <!-- Dune -->
+                <div class="swiper-slide">
+                    <div class="movie-card landscape-card" data-tilt>
+                        <img src="Images/dune.webp"
+                             class="cinematic-img"
+                             alt="Dune">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Dune</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WandaVision -->
+                <div class="swiper-slide">
+                    <div class="movie-card landscape-card" data-tilt>
+                        <img src="Images/wadevision (1).webp"
+                             class="cinematic-img"
+                             alt="WandaVision">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">WandaVision</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stranger Things -->
+                <div class="swiper-slide">
+                    <div class="movie-card landscape-card" data-tilt>
+                        <img src="Images/stranger things.webp"
+                             class="cinematic-img"
+                             alt="Stranger Things">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Stranger Things</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Mandalorian -->
+                <div class="swiper-slide">
+                    <div class="movie-card landscape-card" data-tilt>
+                        <img src="Images/mandalorine.webp"
+                             class="cinematic-img"
+                             alt="The Mandalorian">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">The Mandalorian</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- The Boys -->
+                <div class="swiper-slide">
+                    <div class="movie-card landscape-card" data-tilt>
+                        <img src="Images/the boys.webp"
+                             class="cinematic-img"
+                             alt="The Boys">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">The Boys</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loki -->
+                <div class="swiper-slide">
+                    <div class="movie-card landscape-card" data-tilt>
+                        <img src="Images/loki.webp"
+                             class="cinematic-img"
+                             alt="Loki">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Loki</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+    </div>
+</section>
+
+   <!-- 3. Upcoming Movies -->
+<section class="upcoming-section" style="padding: 2rem 0 5rem 0;">
+    <h2 class="section-title">Upcoming Movies</h2>
+
+    <div class="container">
+        <div class="swiper upcomingSwiper">
+
+            <div class="swiper-wrapper">
+
+                <!-- Dune -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/dune.webp"
+                             class="cinematic-img"
+                             alt="Dune">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Dune</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wonder Woman 1984 -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/why so serious.webp"
+                             class="cinematic-img"
+                             alt="Wonder Woman 1984">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Why So Serious?</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Black Widow -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/The wolf of wall street.webp"
+                             class="cinematic-img"
+                             alt="Black Widow">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">The Wolf of Wall Street</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Godzilla vs Kong -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/godlza vs kong.webp"
+                             class="cinematic-img"
+                             alt="Godzilla vs Kong">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Godzilla vs. Kong</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Time To Die -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/no time to.webp"
+                             class="cinematic-img"
+                             alt="No Time To Die">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">No Time to Die</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inception -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/INCEPTION (2).webp"
+                             class="cinematic-img"
+                             alt="Inception">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Inception</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loki -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/loki.webp"
+                             class="cinematic-img"
+                             alt="Loki">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Loki</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spider-Man -->
+                <div class="swiper-slide" style="width:250px;">
+                    <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;">
+                        <div class="badge-coming-soon">Coming Soon</div>
+                        <img src="Images/SPIDER MAN.webp"
+                             class="cinematic-img"
+                             alt="Spider-Man">
+                        <div class="movie-card-overlay">
+                            <h3 class="card-title">Spider-Man</h3>
+                            <button class="icon-btn" onclick="window.location.href='404.html'">
+                                <i class="fas fa-play-circle" style="font-size:2rem;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- 3. Popular Categories -->
+    <section class="categories-section" style="background: var(--bg-color-light); padding: 5rem 0;">
+        <h2 class="section-title">Popular Categories</h2>
+        <div class="container categories-grid">
+            <div class="category-card" onclick="window.location.href='404.html'" style="background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.7)), url('Images/ironman.webp') center/cover;">
+                <h3>Action</h3>
+            </div>
+            <div class="category-card" onclick="window.location.href='404.html'" style="background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.7)), url('Images/ANT-MAN.webp') center/cover;">
+                <h3>Sci-Fi</h3>
+            </div>
+            <div class="category-card" onclick="window.location.href='404.html'" style="background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.7)), url('Images/stranger\ things.webp') center/cover;">
+                <h3>Horror</h3>
+            </div>
+            <div class="category-card" onclick="window.location.href='404.html'" style="background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.7)), url('Images/Titanic.webp') center/cover;">
+                <h3>Romance</h3>
+            </div>
+            <div class="category-card" onclick="window.location.href='404.html'" style="background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.7)), url('Images/home alone.webp') center/cover;">
+                <h3>Comedy</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. New Releases -->
+    <section class="originals-section" style="padding: 5rem 0; overflow: hidden; margin-top: 2rem;">
+        <h2 class="section-title">New Releases</h2>
+        <div class="carousel-container">
+            <div class="swiper originalsSwiper" style="padding: 20px 0 50px 0;">
+                <div class="swiper-wrapper">
+
+    <!-- Original 1 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/deadpool1.webp" class="cinematic-img" alt="Deadpool & Wolverine">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">Deadpool & Wolverine</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original 2 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/wonka.webp" class="cinematic-img" alt="Dune Part Two">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">wonka</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original 3 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/kungfu panda.webp" class="cinematic-img" alt="Inside Out 2">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">kung fu panda</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original 4 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/Inside out.webp" class="cinematic-img" alt="Gladiator II">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">Inside Out</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original 5 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/kingdompalnetapes.webp" class="cinematic-img" alt="Moana 2">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">kingdom of the planet of the apes</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original 6 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/Insideout2.webp" class="cinematic-img" alt="Venom The Last Dance">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">Inside OUT2</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Original 7 -->
+    <div class="swiper-slide" style="width:280px;">
+        <div class="movie-card" data-tilt style="width:100%;aspect-ratio:2/3;border-radius:8px;">
+            <div style="position:absolute;top:10px;left:10px;width:24px;height:24px;background:var(--accent-red);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;z-index:10;">S</div>
+            <img src="Images/ANT-MAN.webp" class="cinematic-img" alt="The Wild Robot">
+            <div class="movie-card-overlay">
+                <h3 class="card-title">Ant-Man</h3>
+                <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:2.5rem;"></i></button>
+            </div>
+        </div>
+    </div>
+
+</div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Showcase -->
+    <section class="featured-showcase" style="height: 100vh; min-height: 800px; display: flex; flex-direction: column; justify-content: center; position: relative;">
+        <!-- Main Background Layer -->
+        <div class="featured-showcase-bg-layer" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; background-image: linear-gradient(to right, rgba(5,5,5,0.92) 30%, rgba(5,5,5,0.7) 60%, rgba(5,5,5,0.15) 100%), url('Images/radha krishan.webp'); background-size: cover; background-position: center; transition: background-image 0.5s ease-in-out;"></div>
+
+        <div class="container" style="position:relative; z-index:10; display:flex; justify-content:flex-start; align-items:center; gap:5rem; height: 100%; max-width: 1300px; margin: 0 auto; padding-top: 0;">
+            <!-- Left: Thumbnail Swiper -->
+            <div class="showcase-left" style="width:280px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:1rem;">
+                <div class="custom-nav-arrow up" style="background: transparent; border: 1px solid rgba(255,255,255,0.6); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.3s; opacity: 0.3; pointer-events: none;"><i class="fas fa-chevron-up"></i></div>
+                
+                <div class="custom-thumb-slider" style="height:520px; width:100%; position:relative; overflow:hidden;">
+                    <div class="custom-thumb-track" style="position:relative; width:100%; height:100%;">
+                        <!-- Thumb 1 -->
+                        <div class="custom-thumb-slide">
+                            <div class="showcase-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/radha krishan.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Krishna">
+                                <div class="showcase-thumb-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 15px;">
+                                    <h5 class="showcase-thumb-title" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">Krishna</h5>
+                                    <div class="showcase-thumb-meta" style="font-size: 0.9rem; color: #ddd;"><i class="far fa-clock"></i> 2 h : 45 min</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thumb 2 -->
+                        <div class="custom-thumb-slide">
+                            <div class="showcase-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/BREAKING BAD.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Breaking Bad">
+                                <div class="showcase-thumb-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 15px;">
+                                    <h5 class="showcase-thumb-title" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">Breaking Bad</h5>
+                                    <div class="showcase-thumb-meta" style="font-size: 0.9rem; color: #ddd;"><i class="far fa-clock"></i> 5 Seasons</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thumb 3 -->
+                        <div class="custom-thumb-slide">
+                            <div class="showcase-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/dune.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Dune">
+                                <div class="showcase-thumb-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 15px;">
+                                    <h5 class="showcase-thumb-title" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">Dune</h5>
+                                    <div class="showcase-thumb-meta" style="font-size: 0.9rem; color: #ddd;"><i class="far fa-clock"></i> 2 h : 14 min</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thumb 4 -->
+                        <div class="custom-thumb-slide">
+                            <div class="showcase-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/300.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="300">
+                                <div class="showcase-thumb-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 15px;">
+                                    <h5 class="showcase-thumb-title" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">300</h5>
+                                    <div class="showcase-thumb-meta" style="font-size: 0.9rem; color: #ddd;"><i class="far fa-clock"></i> 2 h : 20 min</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thumb 5 -->
+                        <div class="custom-thumb-slide">
+                            <div class="showcase-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/INCEPTION.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Inception">
+                                <div class="showcase-thumb-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 15px;">
+                                    <h5 class="showcase-thumb-title" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">Inception</h5>
+                                    <div class="showcase-thumb-meta" style="font-size: 0.9rem; color: #ddd;"><i class="far fa-clock"></i> 2 h : 28 min</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Thumb 6 -->
+                        <div class="custom-thumb-slide">
+                            <div class="showcase-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/Black panther.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Black Panther">
+                                <div class="showcase-thumb-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 15px;">
+                                    <h5 class="showcase-thumb-title" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 5px;">Black Panther</h5>
+                                    <div class="showcase-thumb-meta" style="font-size: 0.9rem; color: #ddd;"><i class="far fa-clock"></i> 2 h : 37 min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="custom-nav-arrow down" style="background: transparent; border: 1px solid rgba(255,255,255,0.6); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.3s;"><i class="fas fa-chevron-down"></i></div>
+            </div>
+
+            <!-- Right: Content Swiper -->
+            <div class="swiper showcaseContentSwiper" style="flex:1; height:100%;">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                        <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:white; margin-bottom:1rem;">Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Animation <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Mystery</div>
+                        <h2 class="hero-anim" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Krishna</h2>
+                        <div class="hero-anim" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                            <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span>
+                            <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">5 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                            <span><i class="far fa-clock"></i> 2 h : 45 min</span>
+                        </div>
+                        <p class="hero-anim" style="font-size:1.2rem; line-height:1.6; max-width:800px; margin-bottom: 2.5rem; color: #ccc;">In the vibrant land of Vrindavan, Krishna: Portrait unfolds as an intimate exploration of the life and legacy of Lord Krishna, one of history's most beloved divine figures. Through a series of rich, interwoven tales, the film...</p>
+                        <div class="hero-anim">
+                            <button class="btn-red" style="width:fit-content; padding: 15px 30px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'">Play Now <i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                        <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:white; margin-bottom:1rem;">Crime <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Drama <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Thriller</div>
+                        <h2 class="hero-anim" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Breaking Bad</h2>
+                        <div class="hero-anim" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                            <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                            <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">9.5 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                            <span><i class="far fa-clock"></i> 5 Seasons</span>
+                        </div>
+                        <p class="hero-anim" style="font-size:1.2rem; line-height:1.6; max-width:800px; margin-bottom: 2.5rem; color: #ccc;">A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine to secure his family's future, descending into the dark underworld of crime.</p>
+                        <div class="hero-anim">
+                            <button class="btn-red" style="width:fit-content; padding: 15px 30px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'">Play Now <i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                        <div style="font-size:1.1rem; font-weight:bold; color:white; margin-bottom:1rem;">Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Comedy <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Marvel</div>
+                        <h2 style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Dune</h2>
+                        <div style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                            <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                            <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.0 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                            <span><i class="far fa-clock"></i> 2 h : 14 min</span>
+                        </div>
+                        <p style="font-size:1.2rem; line-height:1.6; max-width:800px; margin-bottom: 2.5rem; color: #ccc;">A wisecracking mercenary gets experimented on and becomes immortal but ugly, and sets out to track down the man who ruined his looks. A hilarious, R-rated superhero movie that breaks the fourth wall.</p>
+                        <button class="btn-red" style="width:fit-content; padding: 15px 30px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'">Play Now <i class="fas fa-play"></i></button>
+                    </div>
+                    <!-- Slide 4 -->
+                    <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                        <div style="font-size:1.1rem; font-weight:bold; color:white; margin-bottom:1rem;">Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Adventure <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Sci-Fi</div>
+                        <h2 style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">300</h2>
+                        <div style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                            <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.0 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                            <span><i class="far fa-clock"></i> 2 h : 20 min</span>
+                        </div>
+                        <p style="font-size:1.2rem; line-height:1.6; max-width:800px; margin-bottom: 2.5rem; color: #ccc;">Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.</p>
+                        <button class="btn-red" style="width:fit-content; padding: 15px 30px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'">Play Now <i class="fas fa-play"></i></button>
+                    </div>
+                    <!-- Slide 5 -->
+                    <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                        <div style="font-size:1.1rem; font-weight:bold; color:white; margin-bottom:1rem;">Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Thriller</div>
+                        <h2 style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Inception</h2>
+                        <div style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                            <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.8 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                            <span><i class="far fa-clock"></i> 2 h : 28 min</span>
+                        </div>
+                        <p style="font-size:1.2rem; line-height:1.6; max-width:800px; margin-bottom: 2.5rem; color: #ccc;">A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.</p>
+                        <button class="btn-red" style="width:fit-content; padding: 15px 30px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'">Play Now <i class="fas fa-play"></i></button>
+                    </div>
+                    <!-- Slide 6 -->
+                    <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                        <div style="font-size:1.1rem; font-weight:bold; color:white; margin-bottom:1rem;">Adventure <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Drama <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Sci-Fi</div>
+                        <h2 style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Black Panther</h2>
+                        <div style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                            <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                            <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.6 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                            <span><i class="far fa-clock"></i> 2 h : 49 min</span>
+                        </div>
+                        <p style="font-size:1.2rem; line-height:1.6; max-width:800px; margin-bottom: 2.5rem; color: #ccc;">When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.</p>
+                        <button class="btn-red" style="width:fit-content; padding: 15px 30px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'">Play Now <i class="fas fa-play"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suggested For You -->
+    <section class="suggested-section" style="padding: 4rem 0 6rem 0; background: var(--bg-color); overflow: visible; position: relative;">
+        <h2 class="section-title">Suggested For You</h2>
+        <div class="container" style="position: relative;">
+            <div class="swiper suggestedSwiper" style="overflow: visible; padding: 20px 0;">
+                <div class="swiper-wrapper">
+                    <!-- Card 1 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card suggested-card" onclick="window.location.href='how-to-tame_a-dragon.html'" style="width: 100%; aspect-ratio: 2/3; position: relative; cursor: pointer;">
+                            <div class="suggested-img-wrapper">
+                                <img src="Images/How to tame.webp" class="cinematic-img" alt="How To Tame A Dragon">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">How To Tame A Dragon</h3>
+                                    <button class="icon-btn" onclick="event.stopPropagation(); window.location.href='how-to-tame_a-dragon.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card suggested-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="suggested-img-wrapper">
+                                <img src="Images/Logan.webp" class="cinematic-img" alt="Shadow Protocol">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Huge Jackman Logan</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card suggested-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="suggested-img-wrapper">
+                                <img src="Images/The boys.webp" class="cinematic-img" alt="The Void Between Stars">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">The Boys</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card suggested-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="suggested-img-wrapper">
+                                <div style="position: absolute; top: 10px; left: 10px; padding: 4px 8px; background: #E50914; color: white; font-weight: bold; font-size: 8px; border-radius: 2px; z-index: 10; letter-spacing: 0.5px;">COMING SOON</div>
+                                <img src="Images/The Lion king.webp" class="cinematic-img" alt="The Last Frontier">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">The Lion King</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card suggested-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="suggested-img-wrapper">
+                                <img src="Images/BREAKING BAD.webp" class="cinematic-img" alt="Starfall Chronicles">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Breaking Bad</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="swiper-slide" style="width: 145px; margin-right: 20px;">
+                        <div class="movie-card suggested-card" style="width: 100%; aspect-ratio: 2/3; position: relative;">
+                            <div class="suggested-img-wrapper">
+                                <img src="Images/MR.BEAN'S HOLIDAY.webp" class="cinematic-img" alt="Silent Echoes">
+                                <div class="movie-card-overlay">
+                                    <h3 class="card-title" style="font-size: 0.95rem;">Mr. Bean's Holiday</h3>
+                                    <button class="icon-btn" onclick="window.location.href='404.html'"><i class="fas fa-play-circle" style="font-size:1.8rem;"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next" style="color: white; transform: translateY(-20px);"></div>
+                <div class="swiper-button-prev" style="color: white; transform: translateY(-20px);"></div>
+            </div>
+        </div>   
+    </section>
+
+    <!-- Movie of the Year Showcase Section -->
+    <section class="movie-of-year-section">
+        <div class="movie-of-year-container">
+            <!-- Left Side: Content Details -->
+            <div class="movie-of-year-content">
+                <h2 style="font-size: 5rem; font-weight: 900; line-height: 1.1; margin-bottom: 0.8rem; color: #fff; font-family: 'Inter', sans-serif; letter-spacing: -1px;">Godzilla</h2>
+                
+                <div style="display: flex; align-items: center; gap: 1.2rem; color: var(--text-secondary); font-weight: 500; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    <span style="color: gold; display: flex; gap: 3px;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                    <span style="color: white; font-weight: bold; display: flex; align-items: center; gap: 8px;">5 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.85rem; font-weight: 900; line-height: 1;">IMDb</span></span>
+                    <span style="display: flex; align-items: center; gap: 5px;"><i class="far fa-clock"></i> 2 h : 30m</span>
+                </div>
+
+                <h3 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.2rem; letter-spacing: -0.5px;">Movie of the year</h3>
+                
+                <p style="font-size: 1.15rem; line-height: 1.6; color: #ccc; margin-bottom: 2.5rem; font-family: 'Inter', sans-serif;">
+                    Baileys Irish Cream is an Irish cream liqueur an alcoholic beverage flavoured with cream, cocoa, and Irish whiskey made by Diageo at Republic of Ireland and in Mallusk, Northern Ireland.
+                </p>
+
+                <button class="btn-red" style="padding: 12px 28px; font-weight: bold; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; border-radius: 4px; border: none; cursor: pointer;" onclick="window.location.href='404.html'">
+                    Play Now <i class="fas fa-play"></i>
+                </button>
+            </div>
+
+            <!-- Right Side: Poster Card -->
+            <div class="movie-of-year-media">
+                <div class="movie-of-year-card">
+                    <img src="Images/Movieof-the-year-1536x864.webp" alt="Godzilla">
+                </div>
+            </div>
+        </div>
+        <!-- Shadow bottom fade overlay -->
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 150px; background: linear-gradient(to top, rgba(5,5,5,1) 0%, transparent 100%); z-index: 2; pointer-events: none;"></div>
+    </section>
+
+    <!-- Interactive Trending Drawer Section -->
+    <section class="trending-drawer-section" style="padding: 4rem 0 0 0; background: var(--bg-color); position: relative;">
+        <h2 class="section-title">Trending</h2>
+        <div class="container">
+            <!-- Row of Landscape Cards -->
+            <div class="trending-cards-row">
+               <!-- Card 1: Dune -->
+<div class="trending-mini-card" onclick="selectTrending(1)" data-id="1">
+    <img src="Images/Dune.webp" alt="Dune">
+</div>
+
+<!-- Card 2: Stranger Things -->
+<div class="trending-mini-card" onclick="selectTrending(2)" data-id="2">
+    <img src="Images/Stranger Things.webp" alt="Stranger Things">
+</div>
+
+<!-- Card 3: The Lion King -->
+<div class="trending-mini-card active" onclick="selectTrending(3)" data-id="3">
+    <img src="Images/The Lion king.webp" alt="The Lion King">
+</div>
+
+<!-- Card 4: Inception -->
+<div class="trending-mini-card" onclick="selectTrending(4)" data-id="4">
+    <img src="Images/INCEPTION (2).webp" alt="Inception">
+</div>
+
+<!-- Card 5: Movie of the Year -->
+<div class="trending-mini-card" onclick="selectTrending(5)" data-id="5">
+    <img src="Images/Movieof-the-year-1536x864.webp" alt="Movie of the Year">
+</div>
+                </div>
+            </div>
+
+            <!-- Drawer Detail Box -->
+            <div class="trending-drawer-panel" id="trendingDrawer" style="background-image: url('Images/The Lion king.webp'); background-size: cover; background-repeat: no-repeat; margin-bottom: 0;">
+                <!-- Tabs Header -->
+                <div class="drawer-tabs-header">
+                    <button class="drawer-tab-btn active" id="btn-overview" onclick="switchDrawerTab('overview')">OVERVIEW</button>
+                    <button class="drawer-tab-btn" id="btn-episodes" onclick="switchDrawerTab('episodes')">EPISODES</button>
+                </div>
+
+                <!-- Drawer Content Window -->
+                <div class="drawer-inner-content">
+                    <!-- Tab Panel 1: Overview -->
+                    <div class="drawer-tab-panel" id="drawer-overview">
+                        <div class="drawer-info-cols">
+                            <h3 class="drawer-show-title" id="drawerTitle">Assassin creed</h3>
+                            <div class="drawer-meta-row" id="drawerMeta">
+                                <span>2 Seasons</span>
+                                <span>&bull;</span>
+                                <span><i class="far fa-calendar-alt"></i> February 2025</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                                <div class="drawer-top10-badge">
+                                    <span class="badge-gold-border">Top 10</span>
+                                    <span class="badge-rank-text" id="drawerRank">#6 in Series Today</span>
+                                </div>
+                            </div>
+                            <p class="drawer-show-desc" id="drawerDesc">
+                                The Cannibalism among dinosaurs is not necessarily surprising. Many large predators, such as crocodiles and alligators, eat members of their own species under certain...
+                            </p>
+                            <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-weight: bold; display: flex; align-items: center; gap: 8px; border-radius: 4px; border: none; cursor: pointer;" onclick="window.location.href='404.html'">
+                                Play Now <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tab Panel 2: Episodes -->
+                    <div class="drawer-tab-panel" id="drawer-episodes" style="display: none;">
+                        <div style="margin-bottom: 2rem;">
+                            <select class="drawer-season-select" onchange="changeDrawerSeason(this.value)">
+                                <option value="1">Season 1</option>
+                                <option value="2">Season 2</option>
+                            </select>
+                        </div>
+                        <div class="drawer-episodes-list" id="drawerEpisodesList">
+                            <!-- Rendered Episode Cards -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Premium Footer -->
+    <footer style="margin-top: 0; padding-top: 2rem;">
+        <div class="container"><div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo" style="display:flex; align-items:center; margin-bottom:0;">
+                    <img src="Images/logo-removebg-preview.webp" style="height: 60px; width: auto; max-width: 190px; object-fit: contain; filter: brightness(0) saturate(100%) invert(14%) sepia(87%) saturate(6288%) hue-rotate(354deg) brightness(92%) contrast(110%);" alt="Stackly Logo">
+                </a>
+                <p style="margin-top: 5px;">Experience cinematic excellence with our premium streaming service.</p>
+                <div class="social-icons" style="margin-top:1rem; display:flex; gap:1rem;">
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="404.html">Privacy Policy</a></li>
+                    <li><a href="404.html">Terms of Use</a></li>
+                    <li><a href="404.html">Cookie Preferences</a></li>
+                </ul>
+            </div>
+            <div class="footer-brand">
+                <h4>Newsletter</h4>
+                <p style="font-size:0.9rem;">Subscribe for the latest updates.</p>
+                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem;">
+                    <input type="email" placeholder="Email" style="flex:1; min-width:0; padding:0.5rem; border-radius:4px; border:none; background:rgba(255,255,255,0.1); color:white;">
+                    <button class="btn-primary" onclick="window.location.href='404.html'">Subscribe</button>
+                </div>
+            </div>
+        </div></div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Stackly. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(document.querySelector('.heroSwiper')) {
+                new Swiper('.heroSwiper', {
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
+                    navigation: {
+                        nextEl: '.hero-swiper-next',
+                        prevEl: '.hero-swiper-prev',
+                    },
+                    pagination: {
+                        el: '.hero-swiper-pagination',
+                        clickable: true,
+                    },
+                });
+            }
+        });
+    </script>
+</body>
+</html>

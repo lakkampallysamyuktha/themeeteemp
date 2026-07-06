@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly | Series</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+      html, body { 
+        overflow-x: hidden; 
+        background: #050505; 
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* ── Series page mobile overrides ── */
+      @media (max-width: 767px) {
+        /* Fix Hero Heights */
+        .hero-showcase, .hero-two-column, .hero { height: auto !important; min-height: 0 !important; padding-top: 150px !important; padding-bottom: 20px !important; }
+        .hero-showcase .container, .hero-two-column .container, .hero .container { height: auto !important; flex-direction: column !important; gap: 1rem !important; }
+        .hero-showcase .container > div:first-child { margin-top: 80px !important; }
+        .hero-content-wrapper, .hero-text-col, .hero-right-media, .hero-poster-col { width: 100% !important; min-width: 0 !important; flex: none !important; margin-top: 20px !important; }
+        .hero-right-media, .hero-poster-col { display: none !important; }
+        
+        /* Fix Swiper overlapping bugs */
+        .swiper { max-width: 100vw !important; overflow: hidden !important; }
+        .swiper-wrapper { max-width: none !important; overflow: visible !important; }
+        
+        /* Reduce spacing */
+        section { padding: 1.5rem 0 !important; overflow: hidden !important; }
+        #filterSection { padding: 0.5rem 0 !important; }
+        
+        /* Typography */
+        .hero-content-wrapper h1,
+        .hero-content-wrapper h2 {
+          font-size: 2.2rem !important;
+          margin-bottom: 0.2rem !important;
+        }
+        .hero-meta-row {
+          flex-wrap: wrap !important;
+          gap: 0.5rem !important;
+          font-size: 0.9rem !important;
+          margin-bottom: 0.5rem !important;
+        }
+        .hero-desc-text {
+          font-size: 0.9rem !important;
+          margin-bottom: 0.8rem !important;
+        }
+
+        .hero-content-wrapper > div > div:last-child {
+          flex-direction: column;
+          width: 100%;
+          gap: 0.5rem !important;
+        }
+
+        .hero-content-wrapper .btn-red,
+        .hero-content-wrapper .btn-watchlist {
+          width: 100%;
+          justify-content: center;
+          font-size: 0.9rem !important;
+          padding: 10px !important;
+        }
+
+        /* Prevent all hardcoded min-widths from causing horizontal scrolling */
+        [style*="min-width: 320px"],
+        [style*="min-width: 360px"],
+        [style*="min-width:320px"]
+         {
+          min-width: 0 !important;
+          width: 100% !important;
+          overflow: hidden !important;
+        }
+
+        /* Fix the horizontal overflow of the section and episode cards */
+        .series-spotlight-section, .episode-card {
+           display: block !important;
+           width: 100% !important;
+           overflow-x: auto !important;
+        }
+
+        /* Responsive Character Dossier */
+        .character-dossier-section .container > div {
+          flex-direction: column !important;
+        }
+
+        .series-spotlight-section h2 {
+          font-size: 2rem !important;
+        }
+           /* Episode Explorer Grid Fix */
+        [style*="grid-template-columns: repeat(auto-fit, minmax(360px, 1fr))"] {
+          grid-template-columns: 1fr !important;
+        }
+
+        /* Reduce spacing between sections */
+        section { padding: 1rem 0 !important; overflow: hidden !important; }
+        
+        /* Specifically target the gap between Hero, Filter, and Trending */
+        .hero-showcase { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+        #filterSection { padding: 5px 0 !important; margin: 0 !important; border: none !important; }
+        section:nth-of-type(3) { padding-top: 10px !important; margin-top: 0 !important; }
+        
+        .section-title { margin-top: 0 !important; margin-bottom: 1rem !important; }
+        h2 { margin-top: 0 !important; }
+
+        /* Filter bar: horizontal scrolling instead of stacking */
+        #filterSection .container > div {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          -webkit-overflow-scrolling: touch;
+          justify-content: flex-start !important;
+          padding-bottom: 5px;
+          gap: 0.8rem !important;
+        }
+        .filter-btn {
+          display: inline-block !important;
+          width: auto !important;
+          flex-shrink: 0 !important;
+          margin: 0 !important;
+          white-space: nowrap !important;
+          font-size: 0.85rem !important;
+          padding: 8px 16px !important;
+        }
+
+        /* Section 4: Spotlight (Peaky Blinders) */
+        .series-spotlight-section .container {
+          flex-direction: column !important;
+          gap: 1.5rem !important;
+        }
+        .series-spotlight-section h2 {
+          font-size: 2rem !important;
+        }
+        .series-spotlight-section > div > div:last-child {
+          padding: 1.5rem !important;
+        }
+        .series-spotlight-section p {
+          font-size: 0.95rem !important;
+        }
+        .series-spotlight-section .btn-primary,
+        .series-spotlight-section .btn-secondary {
+          width: 100%;
+          justify-content: center;
+          padding: 12px !important;
+        }
+        .series-spotlight-section > div > div:first-child > div:last-child {
+          flex-direction: column;
+          gap: 0.5rem !important;
+        }
+
+        /* Section 5 & 6: Grids */
+        [style*="grid-template-columns: repeat(auto-fit, minmax(360px, 1fr))"],
+        [style*="grid-template-columns: 1fr 1fr"] {
+          grid-template-columns: 1fr !important;
+          gap: 1.5rem !important;
+        }
+        [style*="font-size: 2.8rem"] { font-size: 1.8rem !important; }
+
+        /* Section 7: Character Dossier */
+        .character-dossier-section .container > div:last-child {
+          flex-direction: column !important;
+          gap: 1.5rem !important;
+        }
+        .character-dossier-section .container > div:last-child > div:last-child {
+          padding: 1.5rem !important;
+          flex-direction: column !important;
+        }
+        
+        .trendingSwiper .swiper-slide { width: 160px !important; }
+
+        .numbered-item { flex-wrap: wrap !important; gap: 0.5rem !important; }
+        .num-rank { font-size: 1.8rem !important; width: 36px !important; }
+
+        .footer-content {
+          grid-template-columns: 1fr !important;
+          gap: 1.5rem !important;
+        }
+        footer div[style*="display:flex"],
+        footer div[style*="display: flex"] {
+          flex-wrap: wrap !important;
+        }
+        footer input[type="email"] {
+          flex: 1 !important;
+          min-width: 0 !important;
+          width: 100% !important;
+        }
+      }
+    </style>
+</head>
+<body style="background: #050505; color: #fff;">
+
+    <!-- Cinematic Preloader -->
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #050505; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.6s ease-in-out, visibility 0.6s ease-in-out;">
+        <div class="preloader-content" style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+            <div class="preloader-logo" style="font-size: 4rem; font-weight: 900; color: #E50914; letter-spacing: -2px; animation: logoBeat 1.8s infinite alternate ease-in-out;">Stackly<span style="color:white;">.</span></div>
+            <div class="preloader-bar" style="width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; position: relative;">
+                <div class="preloader-progress" style="width: 0%; height: 100%; background: #E50914; box-shadow: 0 0 10px #E50914; animation: fillBar 1.6s forwards cubic-bezier(0.1, 0.8, 0.1, 1);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo" style="display:flex; align-items:center;">
+                <img src="Images/logo-removebg-preview.webp" style="height: 60px; width: auto; max-width: 190px; object-fit: contain; filter: brightness(0) saturate(100%) invert(14%) sepia(87%) saturate(6288%) hue-rotate(354deg) brightness(92%) contrast(110%);" alt="Stackly Logo">
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html" class="active">Series</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="mylist.html">My List</a></li>
+                </ul>
+            </nav>     
+
+            <div class="header-right">
+                <div class="header-actions">
+                    <a href="404.html" aria-label="Search" style="color: white; font-size: 1.2rem; transition: color 0.3s;" onmouseover="this.style.color='var(--accent-red)'" onmouseout="this.style.color='white'"><i class="fas fa-search"></i></a>
+                    <a href="login.html" class="btn-primary" style="padding: 0.5rem 1.5rem; background: #E50914; color: white; border-radius: 4px; font-weight: bold; text-decoration: none;">Login</a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="series.html" class="active">Series</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="mylist.html">My List</a></li>
+            <li><a href="login.html" class="mobile-login-btn">Login</a></li>
+        </ul>
+    </div>
+
+    <template>
+    <!-- 1. Split Layout Hero (Left Content, Right Floating Image) -->
+    <section class="hero-showcase" style="height: 100vh; min-height: 800px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; background: #050505; padding-top: 100px;">
+        <!-- Background Swiper (crossfade) -->
+        <div class="swiper heroBgSwiper" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1;">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="Images/stranger things.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Stranger Things"></div>
+                <div class="swiper-slide"><img src="Images/mandalorine.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="The Mandalorian"></div>
+                <div class="swiper-slide"><img src="Images/godlza vs kong.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Godzilla vs. Kong"></div>
+                <div class="swiper-slide"><img src="Images/hero succssioon.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Succession"></div>
+                <div class="swiper-slide"><img src="Images/BREAKING BAD.webp" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.35);" alt="Breaking Bad"></div>
+            </div>
+            <!-- Gradient overlay for text readability -->
+            <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.15) 100%); z-index:2;"></div>
+        </div>
+
+        <div class="container" style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: 1300px; margin: 0 auto; gap: 2rem;">
+            
+            <!-- Left Column: Hero Content -->
+            <div style="flex: 1; max-width: 650px;">
+                <div class="swiper heroContentSwiper" style="width: 100%; overflow: hidden;">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1: Stranger Things -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Horror <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Mystery</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Stranger Things</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.6 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 4 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces and one strange little girl.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 2: Mandalorian -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Adventure</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">The Mandalorian</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.7 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 3 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">The travels of a lone bounty hunter in the outer reaches of the galaxy, far from the authority of the New Republic.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 3: Godzilla vs Kong -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Action <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Sci-Fi <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Thriller</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Godzilla vs. Kong</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">6.3 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 1 h : 53 min</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">The epic next chapter in the cinematic Monsterverse pits two of the greatest icons in motion picture history against each other - the fearsome Godzilla and the mighty Kong - with humanity caught in the balance.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 4: Succession -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Drama <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Corporate</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Succession</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">8.9 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 4 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">The Roy family is known for controlling the biggest media and entertainment company in the world. However, their world changes when their father steps down.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                        <!-- Slide 5: Breaking Bad -->
+                        <div class="swiper-slide" style="display:flex; flex-direction:column; justify-content:center;">
+                            <div class="hero-anim" style="font-size:1.1rem; font-weight:bold; color:var(--accent-red); margin-bottom:1rem;">Crime <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Drama <span style="color:var(--accent-red); margin:0 5px;">&bull;</span> Thriller</div>
+                            <h2 class="hero-anim hero-title-text" style="font-size:5rem; margin-bottom:1.5rem; font-weight:900; line-height: 1;">Breaking Bad</h2>
+                            <div class="hero-anim hero-meta-row" style="display: flex; align-items: center; gap: 1.5rem; color:var(--text-secondary); font-weight:500; margin-bottom: 2rem; font-size: 1.2rem;">
+                                <span style="color:gold;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                <span style="color: white; font-weight: bold; display:flex; align-items:center; gap:8px;">9.5 <span style="background: #f5c518; color: black; padding: 2px 6px; border-radius: 4px; font-size: 0.9rem; font-weight: 900;">IMDb</span></span>
+                                <span><i class="far fa-clock"></i> 5 Seasons</span>
+                            </div>
+                            <p class="hero-anim hero-desc-text" style="font-size:1.2rem; line-height:1.6; max-width:600px; margin-bottom: 2.5rem; color: #ccc;">A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine to secure his family's future.</p>
+                            <div class="hero-anim" style="display: flex; align-items: center; gap: 1rem;">
+                                <button class="btn-red" style="width:fit-content; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius:4px; font-weight:bold;" onclick="window.location.href='404.html'"><i class="fas fa-play"></i> Play Now</button>
+                                <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onclick="window.location.href='404.html'"><i class="fas fa-plus"></i> Watchlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Thumbnail Selector Swiper -->
+            <div class="hero-right-media" style="width: 40%; min-width: 0; z-index: 10; display: flex; align-items: center; gap: 1rem; flex-shrink: 0; align-self: flex-end; padding-bottom: 80px;">
+                <div class="custom-hero-arrow prev" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.3s; color: white; flex-shrink: 0;"><i class="fas fa-chevron-left"></i></div>
+                
+                <div class="swiper heroThumbSwiper" style="width: 100%; overflow: hidden; padding: 10px 0; margin-top: -10px; margin-bottom: -10px;">
+                    <div class="swiper-wrapper">
+                        <!-- Thumb 1 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/stranger things.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Stranger Things">
+                            </div>
+                        </div>
+                        <!-- Thumb 2 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/mandalorine.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="The Mandalorian">
+                            </div>
+                        </div>
+                        <!-- Thumb 3 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/godlza vs kong.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Godzilla vs Kong">
+                            </div>
+                        </div>
+                        <!-- Thumb 4 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/hero succssioon.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Succession">
+                            </div>
+                        </div>
+                        <!-- Thumb 5 -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/BREAKING BAD.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Breaking Bad">
+                            </div>
+                        </div>
+                        <!-- DUPLICATES FOR INFINITE LOOP FIX -->
+                        <!-- Thumb 6 (Copy of 1) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/stranger things.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Stranger Things">
+                            </div>
+                        </div>
+                        <!-- Thumb 7 (Copy of 2) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/mandalorine.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="The Mandalorian">
+                            </div>
+                        </div>
+                        <!-- Thumb 8 (Copy of 3) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/godlza vs kong.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Godzilla vs Kong">
+                            </div>
+                        </div>
+                        <!-- Thumb 9 (Copy of 4) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/hero succssioon.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Succession">
+                            </div>
+                        </div>
+                        <!-- Thumb 10 (Copy of 5) -->
+                        <div class="swiper-slide hero-thumb-slide" style="width: 180px; flex-shrink:0;">
+                            <div class="hero-thumb-card" style="aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; position: relative; width: 100%;">
+                                <img src="Images/BREAKING BAD.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Breaking Bad">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="custom-hero-arrow next" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; cursor: pointer; transition: 0.3s; color: white; flex-shrink: 0;"><i class="fas fa-chevron-right"></i></div>
+            </div>
+        </div>
+    </section>
+    </template>
+    
+    <!-- 1. Split Layout Hero (Left Content, Right Floating Image Grid) -->
+    <section class="hero-showcase" style="height: 100vh; min-height: 800px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; background: #050505; padding-top: 80px;">
+        <!-- Background Image with Gradient Overlay -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+            <img src="Images/game of thrones.webp" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.3);" alt="Hero Background">
+        </div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.7) 40%, rgba(5,5,5,0.1) 100%); z-index: 2;"></div>
+
+        <div class="container" style="position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; height: 100%; max-width: 1300px; margin: 0 auto; gap: 4rem;">
+            
+            <!-- Left Column: Hero Content -->
+            <div style="flex: 1; max-width: 600px; animation: slideInLeft 1s ease forwards;">
+                <div class="badge badge-accent" style="margin-bottom: 1rem; display: inline-block; background: rgba(229, 9, 20, 0.2); color: #E50914; padding: 6px 12px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px;">SERIES</div>
+                <h1 style="font-size: 4.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; color: #fff; letter-spacing: -1px;">
+                    Binge-Worthy <br><span style="color: #E50914;">Series</span>
+                </h1>
+                <p style="font-size: 1.2rem; line-height: 1.6; color: #ccc; margin-bottom: 2.5rem;">
+                    Discover gripping dramas, hilarious comedies, and thrilling mysteries that will keep you on the edge of your seat.
+                </p>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="btn-red" style="padding: 14px 32px; font-size: 1.1rem; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; display: flex; align-items: center; gap: 10px;" onclick="window.location.href='404.html'">
+                        <i class="fas fa-play"></i> Start Watching
+                    </button>
+                    <button class="btn-watchlist" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 14px 32px; font-size: 1.1rem; display: flex; align-items: center; gap: 10px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)';" onmouseout="this.style.background='rgba(255,255,255,0.1)';" onclick="window.location.href='404.html'">
+                        <i class="fas fa-compass"></i> Explore
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Floating Image Grid -->
+            <div style="flex: 1; display: flex; justify-content: flex-end; position: relative; height: 500px; animation: slideInRight 1s ease forwards;">
+                <div style="position: relative; width: 100%; max-width: 450px; height: 100%;">
+                    <!-- Floating Image 1 (Top Right) -->
+                    <div class="floating-img-card" style="position: absolute; top: 0; right: 0; width: 65%; aspect-ratio: 2/3; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); z-index: 3; animation: floatAnim 6s ease-in-out infinite;">
+                        <img src="Images/BREAKING BAD.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Breaking Bad">
+                    </div>
+                    <!-- Floating Image 2 (Bottom Left) -->
+                    <div class="floating-img-card" style="position: absolute; bottom: 20px; left: 0; width: 55%; aspect-ratio: 2/3; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); z-index: 2; animation: floatAnim 7s ease-in-out infinite reverse;">
+                        <img src="Images/PEAKY BLINDERS.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Peaky Blinders">
+                    </div>
+                    <!-- Floating Image 3 (Middle Left/Back) -->
+                    <div class="floating-img-card" style="position: absolute; top: 80px; left: -40px; width: 45%; aspect-ratio: 2/3; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.9); border: 1px solid rgba(255,255,255,0.05); z-index: 1; filter: brightness(0.5); animation: floatAnim 5s ease-in-out infinite 1s;">
+                        <img src="Images/stranger things.webp" style="width: 100%; height: 100%; object-fit: cover;" alt="Stranger Things">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .floating-img-card {
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                cursor: default;
+            }
+            .floating-img-card:hover {
+                z-index: 10 !important;
+                transform: scale(1.05) translateY(-10px) !important;
+                filter: brightness(1.1) !important;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+                animation-play-state: paused;
+            }
+            @keyframes slideInLeft {
+                0% { opacity: 0; transform: translateX(-50px); }
+                100% { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                0% { opacity: 0; transform: translateX(50px); }
+                100% { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes floatAnim {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-15px); }
+            }
+            
+            /* Mobile Responsiveness */
+            @media (max-width: 768px) {
+                .hero-showcase {
+                    padding-top: 100px !important;
+                    height: auto !important;
+                    min-height: 80vh !important;
+                }
+                .hero-showcase .container {
+                    flex-direction: column !important;
+                    justify-content: center !important;
+                    text-align: center !important;
+                    gap: 2rem !important;
+                }
+                /* Target Left Column */
+                .hero-showcase .container > div:nth-of-type(1) {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    max-width: 100% !important;
+                }
+                /* Target Right Column */
+                .hero-showcase .container > div:nth-of-type(2) {
+                    display: none !important;
+                }
+                /* Font sizes */
+                .hero-showcase h1 {
+                    font-size: 2.5rem !important;
+                    line-height: 1.5 !important;
+                }
+                .hero-showcase p {
+                    font-size: 1rem !important;
+                    margin-bottom: 2rem !important;
+                }
+            }
+        </style>
+    </section>
+
+    <!-- SECTION 2: Interactive Genre/Category Filter Bar -->
+    <section style="background:#090909; padding:2rem 0; border-bottom:1px solid rgba(255,255,255,0.05);" id="filterSection">
+        <div class="container">
+            <div style="display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap;">
+                <button class="filter-btn active" onclick="filterSeries('all')">All Series</button>
+                <button class="filter-btn" onclick="filterSeries('drama')">Drama</button>
+                <button class="filter-btn" onclick="filterSeries('scifi')">Sci-Fi</button>
+                <button class="filter-btn" onclick="filterSeries('crime')">Crime</button>
+                <button class="filter-btn" onclick="filterSeries('action')">Action & Adventure</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Trending Series Swiper -->
+    <section style="padding: 5rem 0; background: #050505;">
+        <h2 class="section-title">Trending Series</h2>
+        <div class="container">
+            <div class="swiper trendingSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Card 1 -->
+                    <div class="swiper-slide series-card-item genre-scifi" style="width:280px;">
+                        <div class="movie-card" data-tilt style="width:100%; aspect-ratio:2/3; border-radius:8px;">
+                            <img src="Images/stranger things.webp" class="cinematic-img" alt="Stranger Things">
+                            <div class="movie-card-overlay">
+                                <h3 class="card-title">Stranger Things</h3>
+                                <div class="card-meta" style="margin-bottom:1rem;">
+                                    <span>Sci-Fi</span>
+                                    <span>⭐ 8.6</span>
+                                </div>
+                                <button class="btn-primary btn-sm" onclick="window.location.href='404.html'" style="justify-content:center; width:100%;"><i class="fas fa-play"></i> Play</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="swiper-slide series-card-item genre-crime" style="width:280px;">
+                        <div class="movie-card" data-tilt style="width:100%; aspect-ratio:2/3; border-radius:8px;">
+                            <img src="Images/PEAKY BLINDERS.webp" class="cinematic-img" alt="Peaky Blinders">
+                            <div class="movie-card-overlay">
+                                <h3 class="card-title">Peaky Blinders</h3>
+                                <div class="card-meta" style="margin-bottom:1rem;">
+                                    <span>Crime</span>
+                                    <span>⭐ 8.8</span>
+                                </div>
+                                <button class="btn-primary btn-sm" onclick="window.location.href='404.html'" style="justify-content:center; width:100%;"><i class="fas fa-play"></i> Play</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="swiper-slide series-card-item genre-scifi" style="width:280px;">
+                        <div class="movie-card" data-tilt style="width:100%; aspect-ratio:2/3; border-radius:8px;">
+                            <img src="Images/mandalorine.webp" class="cinematic-img" alt="The Mandalorian">
+                            <div class="movie-card-overlay">
+                                <h3 class="card-title">The Mandalorian</h3>
+                                <div class="card-meta" style="margin-bottom:1rem;">
+                                    <span>Sci-Fi</span>
+                                    <span>⭐ 8.7</span>
+                                </div>
+                                <button class="btn-primary btn-sm" onclick="window.location.href='404.html'" style="justify-content:center; width:100%;"><i class="fas fa-play"></i> Play</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="swiper-slide series-card-item genre-action" style="width:280px;">
+                        <div class="movie-card" data-tilt style="width:100%; aspect-ratio:2/3; border-radius:8px;">
+                            <img src="Images/LOKI.webp" class="cinematic-img" alt="Loki">
+                            <div class="movie-card-overlay">
+                                <h3 class="card-title">Loki</h3>
+                                <div class="card-meta" style="margin-bottom:1rem;">
+                                    <span>Action</span>
+                                    <span>⭐ 8.2</span>
+                                </div>
+                                <button class="btn-primary btn-sm" onclick="window.location.href='404.html'" style="justify-content:center; width:100%;"><i class="fas fa-play"></i> Play</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="swiper-slide series-card-item genre-crime" style="width:280px;">
+                        <div class="movie-card" data-tilt style="width:100%; aspect-ratio:2/3; border-radius:8px;">
+                            <img src="Images/BREAKING BAD.webp" class="cinematic-img" alt="Breaking Bad">
+                            <div class="movie-card-overlay">
+                                <h3 class="card-title">Breaking Bad</h3>
+                                <div class="card-meta" style="margin-bottom:1rem;">
+                                    <span>Crime</span>
+                                    <span>⭐ 9.5</span>
+                                </div>
+                                <button class="btn-primary btn-sm" onclick="window.location.href='404.html'" style="justify-content:center; width:100%;"><i class="fas fa-play"></i> Play</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="swiper-slide series-card-item genre-drama" style="width:280px;">
+                        <div class="movie-card" data-tilt style="width:100%; aspect-ratio:2/3; border-radius:8px;">
+                            <img src="Images/hero succssioon.webp" class="cinematic-img" alt="Succession">
+                            <div class="movie-card-overlay">
+                                <h3 class="card-title">Succession</h3>
+                                <div class="card-meta" style="margin-bottom:1rem;">
+                                    <span>Drama</span>
+                                    <span>⭐ 8.8</span>
+                                </div>
+                                <button class="btn-primary btn-sm" onclick="window.location.href='404.html'" style="justify-content:center; width:100%;"><i class="fas fa-play"></i> Play</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: Exclusive Series Spotlight (Interactive Accordion) -->
+    <section class="series-spotlight-section" style="padding: 7rem 0; position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); background: #050505;">
+        <!-- Moving Background Layer -->
+        <div style="position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; overflow: hidden;">
+            <img src="Images/PEAKY BLINDERS.webp" class="hero-kenburns-img" style="filter: brightness(0.2) blur(2px);" alt="Peaky Blinders Background">
+            <!-- Widescreen gradient overlay -->
+            <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, rgba(5,5,5,0.98) 40%, rgba(5,5,5,0.65) 75%, rgba(5,5,5,0.3) 100%);"></div>
+        </div>
+
+        <div class="container" style="position:relative; z-index:10; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 4rem; flex-wrap: wrap;">
+            <!-- Left Side Details -->
+            <div style="flex: 1; min-width: 320px;">
+                <div style="display:flex; gap:10px; align-items:center; margin-bottom:1rem; flex-wrap:wrap;">
+                    <span class="badge badge-gold"><i class="fas fa-award"></i> CRITICS CHOICE</span>
+                    <span style="color:var(--text-secondary); font-size:0.9rem; font-weight:bold;">Crime • Drama • TV-MA</span>
+                </div>
+                <h2 style="font-size: 4rem; font-weight: 900; color: #fff; margin-bottom: 1rem; line-height: 1.1; font-family:'Inter', sans-serif;">Peaky Blinders</h2>
+                
+                <!-- Quick Meta Stats Row -->
+                <div style="display:flex; align-items:center; gap:20px; color:#aaa; font-size:0.95rem; margin-bottom:1.5rem;">
+                    <span style="color:gold;"><i class="fas fa-star"></i> 8.8 IMDb</span>
+                    <span>•</span>
+                    <span>Created by: <strong>Steven Knight</strong></span>
+                    <span>•</span>
+                    <span>Starring: <strong>Cillian Murphy</strong></span>
+                </div>
+
+                <p style="color: #ccc; font-size: 1.15rem; line-height: 1.6; margin-bottom: 2.5rem; max-width: 600px;">A gangster family epic set in 1919 Birmingham, England; centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn-primary" onclick="window.location.href='404.html'" style="padding: 12px 28px; font-weight:bold;"><i class="fas fa-play"></i> Stream S1 E1</button>
+                    <button class="btn-secondary" onclick="window.location.href='404.html'" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 12px 28px; font-weight:bold;"><i class="fas fa-plus"></i> Watchlist</button>
+                </div>
+            </div>
+
+            <!-- Right Side Expandable Season Accordion -->
+            <div style="flex: 0.9; min-width: 320px; background: rgba(0,0,0,0.72); border: 1px solid rgba(229, 9, 20, 0.25); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(12px); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(229,9,20,0.05);">
+                <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem; color:#fff; display:flex; align-items:center; gap:10px;"><i class="fas fa-layer-group" style="color:var(--accent-red);"></i> Browse Seasons</h3>
+                
+                <!-- Season 1 -->
+                <div class="season-acc-item" style="margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.2rem;">
+                    <div onclick="toggleSeason(1)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+                        <span style="font-weight: 800; font-size: 1.15rem; color: #fff; transition: 0.3s;" id="title-s1">Season 1 (6 Episodes)</span>
+                        <i class="fas fa-chevron-down" id="arrow-s1" style="transition: transform 0.3s ease; color: #fff;"></i>
+                    </div>
+                    <div id="content-s1" style="margin-top: 0.8rem; font-size: 0.95rem; color: #bbb; line-height: 1.5; display: none;">
+                        Thomas Shelby plans to acquire a license to run a legal betting operation, but his schemes are threatened by the arrival of a ruthless police inspector.
+                    </div>
+                </div>
+
+                <!-- Season 2 -->
+                <div class="season-acc-item" style="margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1.2rem;">
+                    <div onclick="toggleSeason(2)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+                        <span style="font-weight: 800; font-size: 1.15rem; color: #fff; transition: 0.3s;" id="title-s2">Season 2 (6 Episodes)</span>
+                        <i class="fas fa-chevron-down" id="arrow-s2" style="transition: transform 0.3s ease; color: #fff;"></i>
+                    </div>
+                    <div id="content-s2" style="margin-top: 0.8rem; font-size: 0.95rem; color: #bbb; line-height: 1.5; display: none;">
+                        As the Shelby family expands their empire south into London, Tommy encounters new rivals and enters a dangerous alliance with an unpredictable business partner.
+                    </div>
+                </div>
+
+                <!-- Season 3 -->
+                <div class="season-acc-item">
+                    <div onclick="toggleSeason(3)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+                        <span style="font-weight: 800; font-size: 1.15rem; color: #fff; transition: 0.3s;" id="title-s3">Season 3 (6 Episodes)</span>
+                        <i class="fas fa-chevron-down" id="arrow-s3" style="transition: transform 0.3s ease; color: #fff;"></i>
+                    </div>
+                    <div id="content-s3" style="margin-top: 0.8rem; font-size: 0.95rem; color: #bbb; line-height: 1.5; display: none;">
+                        Tommy Shelby is pulled into a web of international intrigue, placing his family, his wedding, and his entire empire at risk under pressure from global syndicates.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: Episode Explorer Hub -->
+    <section style="padding: 6rem 0; background: #080808;">
+        <div class="container" style="max-width: 1300px; margin: 0 auto;">
+            <div style="margin-bottom: 3rem; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap: 1rem;">
+                <div>
+                    <span class="badge badge-accent" style="margin-bottom: 0.8rem;">NEW RELEASES</span>
+                    <h2 style="font-size: 2.8rem; font-weight: 900;">Episodes Added Today</h2>
+                </div>
+                <div onclick="window.location.href='404.html'" style="font-size: 1.1rem; color: var(--accent-red); font-weight: bold; cursor: pointer;">View Full Schedule <i class="fas fa-arrow-right"></i></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem;">
+                <!-- Episode 1 -->
+                <div class="episode-card ep-anim" style="flex-direction: column; gap: 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; padding: 0;">
+                    <div class="ep-thumb" style="width: 100%; height: 210px; position: relative;">
+                        <img src="Images/LOKI.webp" style="width:100%; height:100%; object-fit:cover;" alt="Loki">
+                        <div class="badge" style="position:absolute; top:12px; left:12px; background:var(--accent-red); color:white; font-weight: bold; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">S2 EPISODE</div>
+                        <button class="icon-btn" onclick="window.location.href='404.html'" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background: none; border: none; cursor: pointer; color: white;"><i class="fas fa-play-circle" style="font-size:3.5rem; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));"></i></button>
+                    </div>
+                    <div class="ep-info" style="padding: 1.5rem;">
+                        <span style="color:var(--text-secondary); font-size:0.85rem; font-weight:bold; text-transform:uppercase;">Loki</span>
+                        <h4 style="font-size: 1.3rem; margin: 5px 0 10px 0; color: #fff;">Science/Fiction</h4>
+                        <p style="font-size: 0.95rem; color:#aaa; line-height: 1.5;">Loki fights to save the Time Variance Authority as its temporal core reaches critical meltdown status.</p>
+                    </div>
+                </div>
+
+                <!-- Episode 2 -->
+                <div class="episode-card ep-anim" style="flex-direction: column; gap: 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; padding: 0;">
+                    <div class="ep-thumb" style="width: 100%; height: 210px; position: relative;">
+                        <img src="Images/mandalorine.webp" style="width:100%; height:100%; object-fit:cover;" alt="Mandalorian">
+                        <div class="badge" style="position:absolute; top:12px; left:12px; background:var(--accent-red); color:white; font-weight: bold; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">S3 EPISODE</div>
+                        <button class="icon-btn" onclick="window.location.href='404.html'" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background: none; border: none; cursor: pointer; color: white;"><i class="fas fa-play-circle" style="font-size:3.5rem; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));"></i></button>
+                    </div>
+                    <div class="ep-info" style="padding: 1.5rem;">
+                        <span style="color:var(--text-secondary); font-size:0.85rem; font-weight:bold; text-transform:uppercase;">The Mandalorian</span>
+                        <h4 style="font-size: 1.3rem; margin: 5px 0 10px 0; color: #fff;">The Return</h4>
+                        <p style="font-size: 0.95rem; color:#aaa; line-height: 1.5;">Din Djarin and Bo-Katan lead a dangerous mission to reclaim Mandalore from imperial remnants.</p>
+                    </div>
+                </div>
+
+                <!-- Episode 3 -->
+                <div class="episode-card ep-anim" style="flex-direction: column; gap: 0; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; padding: 0;">
+                    <div class="ep-thumb" style="width: 100%; height: 210px; position: relative;">
+                        <img src="Images/BREAKING BAD.webp" style="width:100%; height:100%; object-fit:cover;" alt="Breaking Bad">
+                        <div class="badge" style="position:absolute; top:12px; left:12px; background:var(--accent-red); color:white; font-weight: bold; padding: 4px 8px; border-radius: 4px; font-size: 0.8rem;">S5 EPISODE</div>
+                        <button class="icon-btn" onclick="window.location.href='404.html'" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background: none; border: none; cursor: pointer; color: white;"><i class="fas fa-play-circle" style="font-size:3.5rem; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));"></i></button>
+                    </div>
+                    <div class="ep-info" style="padding: 1.5rem;">
+                        <span style="color:var(--text-secondary); font-size:0.85rem; font-weight:bold; text-transform:uppercase;">Breaking Bad</span>
+                        <h4 style="font-size: 1.3rem; margin: 5px 0 10px 0; color: #fff;">Felina</h4>
+                        <p style="font-size: 0.95rem; color:#aaa; line-height: 1.5;">Walter White returns to Albuquerque to settle scores, rescue Jesse, and secure his family's trust.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: Top Rated Series Leaderboard -->
+    <section class="top-rated-series-section" style="padding: 6rem 0; background: #050505; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container" style="max-width: 1300px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <span class="badge badge-gold" style="margin-bottom: 0.8rem;"><i class="fas fa-trophy"></i> CRITICS CHOICE</span>
+                <h2 style="font-size: 3rem; font-weight: 900; color: white;">Top Ranked Series</h2>
+                <p style="color: var(--text-secondary); font-size: 1.1rem;">The absolute highest rated television series of all time as voted by viewers.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; flex-wrap: wrap;">
+                <div class="numbered-list">
+                    <div class="numbered-item">
+                        <div class="num-rank">1</div>
+                        <img src="Images/BREAKING BAD.webp" class="cinematic-img" style="border-radius:4px; width: 80px; aspect-ratio: 16/9; object-fit: cover;" alt="Breaking Bad">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem; font-size: 1.15rem; color: #fff;">Breaking Bad</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Crime • 5 Seasons • ⭐ 9.5</p>
+                        </div>
+                    </div>
+                    <div class="numbered-item">
+                        <div class="num-rank">2</div>
+                        <img src="Images/PEAKY BLINDERS.webp" class="cinematic-img" style="border-radius:4px; width: 80px; aspect-ratio: 16/9; object-fit: cover;" alt="Peaky Blinders">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem; font-size: 1.15rem; color: #fff;">Peaky Blinders</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Drama • 6 Seasons • ⭐ 8.8</p>
+                        </div>
+                    </div>
+                    <div class="numbered-item">
+                        <div class="num-rank">3</div>
+                        <img src="Images/hero succssioon.webp" class="cinematic-img" style="border-radius:4px; width: 80px; aspect-ratio: 16/9; object-fit: cover;" alt="Succession">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem; font-size: 1.15rem; color: #fff;">Succession</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Drama • 4 Seasons • ⭐ 8.8</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="numbered-list">
+                    <div class="numbered-item">
+                        <div class="num-rank">4</div>
+                        <img src="Images/mandalorine.webp" class="cinematic-img" style="border-radius:4px; width: 80px; aspect-ratio: 16/9; object-fit: cover;" alt="Mandalorian">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem; font-size: 1.15rem; color: #fff;">The Mandalorian</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Sci-Fi • 3 Seasons • ⭐ 8.7</p>
+                        </div>
+                    </div>
+                    <div class="numbered-item">
+                        <div class="num-rank">5</div>
+                        <img src="Images/stranger things.webp" class="cinematic-img" style="border-radius:4px; width: 80px; aspect-ratio: 16/9; object-fit: cover;" alt="Stranger Things">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem; font-size: 1.15rem; color: #fff;">Stranger Things</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Sci-Fi • 4 Seasons • ⭐ 8.6</p>
+                        </div>
+                    </div>
+                    <div class="numbered-item">
+                        <div class="num-rank">6</div>
+                        <img src="Images/LOKI.webp" class="cinematic-img" style="border-radius:4px; width: 80px; aspect-ratio: 16/9; object-fit: cover;" alt="Loki">
+                        <div>
+                            <h4 style="margin-bottom:0.2rem; font-size: 1.15rem; color: #fff;">Loki</h4>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Action • 2 Seasons • ⭐ 8.2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Character Spotlight Dossier -->
+    <section class="character-dossier-section" style="padding: 6rem 0; background: #080808; border-top: 1px solid rgba(255,255,255,0.05); position: relative;">
+        <div class="container" style="max-width: 1300px; margin: 0 auto; display: flex; flex-direction: column; gap: 3rem;">
+            <div style="text-align: left;">
+                <span class="badge badge-accent" style="margin-bottom: 0.8rem;">FEATURED CAST</span>
+                <h2 style="font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 0.5rem;">Character Spotlight</h2>
+                <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 600px;">Click on an icon below to inspect their tactical dossier, stats, and signature quotes.</p>
+            </div>
+
+            <div style="display: flex; gap: 4rem; align-items: center; flex-wrap: wrap;">
+                <!-- Left: Avatars List -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem; flex: 0.8; min-width: 250px;">
+                    <!-- Avatar 1 -->
+                    <div class="dossier-avatar active" onclick="loadDossier(1)" style="display: flex; align-items: center; gap: 1.2rem; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); transition: 0.3s;">
+                        <img src="Images/stranger things.webp" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-red);" alt="Eleven">
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: #fff; margin:0;">Eleven</h4>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Stranger Things</span>
+                        </div>
+                    </div>
+                    <!-- Avatar 2 -->
+                    <div class="dossier-avatar" onclick="loadDossier(2)" style="display: flex; align-items: center; gap: 1.2rem; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid transparent; background: transparent; transition: 0.3s;">
+                        <img src="Images/PEAKY BLINDERS.webp" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid transparent;" alt="Tommy Shelby">
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: #bbb; margin:0;">Tommy Shelby</h4>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Peaky Blinders</span>
+                        </div>
+                    </div>
+                    <!-- Avatar 3 -->
+                    <div class="dossier-avatar" onclick="loadDossier(3)" style="display: flex; align-items: center; gap: 1.2rem; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid transparent; background: transparent; transition: 0.3s;">
+                        <img src="Images/LOKI.webp" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid transparent;" alt="Loki">
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: #bbb; margin:0;">Loki</h4>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Loki</span>
+                        </div>
+                    </div>
+                    <!-- Avatar 4 -->
+                    <div class="dossier-avatar" onclick="loadDossier(4)" style="display: flex; align-items: center; gap: 1.2rem; cursor: pointer; padding: 10px; border-radius: 8px; border: 1px solid transparent; background: transparent; transition: 0.3s;">
+                        <img src="Images/BREAKING BAD.webp" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid transparent;" alt="Walter White">
+                        <div>
+                            <h4 style="font-size: 1.1rem; color: #bbb; margin:0;">Walter White</h4>
+                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Breaking Bad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Dossier Dashboard Card -->
+                <div style="flex: 1.2; min-width: 320px; background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 2.5rem; backdrop-filter: blur(15px); box-shadow: 0 30px 70px rgba(0,0,0,0.8); display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; aspect-ratio: 1/1.2; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); position: relative;">
+                        <img id="dossierImg" src="Images/stranger things.webp" style="width:100%; height:100%; object-fit: cover; transition: transform 0.5s ease;" alt="Dossier Character Photo">
+                    </div>
+                    
+                    <div style="flex: 1.2; min-width: 250px;">
+                        <span id="dossierActor" style="color: var(--accent-red); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Millie Bobby Brown</span>
+                        <h3 id="dossierName" style="font-size: 2.2rem; font-weight: 900; margin: 5px 0 15px 0; color: #fff;">Eleven</h3>
+                        <p id="dossierQuote" style="font-style: italic; color: #ccc; border-left: 3px solid var(--accent-red); padding-left: 1rem; margin-bottom: 2rem; font-size: 1.05rem;">"Friends don't lie."</p>
+                        
+                        <!-- Stats Bars -->
+                        <div style="display:flex; flex-direction:column; gap:1.2rem;">
+                            <!-- Stat 1 -->
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:bold; margin-bottom: 5px;">
+                                    <span>TACTICAL POWER</span>
+                                    <span id="statPowerVal">95%</span>
+                                </div>
+                                <div style="width:100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow:hidden;">
+                                    <div id="statPowerBar" style="width:95%; height:100%; background: var(--accent-red); transition: width 0.6s cubic-bezier(0.1, 0.8, 0.1, 1);"></div>
+                                </div>
+                            </div>
+                            <!-- Stat 2 -->
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:bold; margin-bottom: 5px;">
+                                    <span>INTELLECT RANGE</span>
+                                    <span id="statIntelVal">75%</span>
+                                </div>
+                                <div style="width:100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow:hidden;">
+                                    <div id="statIntelBar" style="width:75%; height:100%; background: #ffc107; transition: width 0.6s cubic-bezier(0.1, 0.8, 0.1, 1);"></div>
+                                </div>
+                            </div>
+                            <!-- Stat 3 -->
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:bold; margin-bottom: 5px;">
+                                    <span>GLOBAL INFLUENCE</span>
+                                    <span id="statInfluenceVal">88%</span>
+                                </div>
+                                <div style="width:100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow:hidden;">
+                                    <div id="statInfluenceBar" style="width:88%; height:100%; background: #00bcd4; transition: width 0.6s cubic-bezier(0.1, 0.8, 0.1, 1);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Premium Footer -->
+    <footer style="margin-top: 0; padding-top: 2rem;">
+        <div class="container"><div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo" style="display:flex; align-items:center; margin-bottom:0;">
+                    <img src="Images/logo-removebg-preview.webp" style="height: 60px; width: auto; max-width: 190px; object-fit: contain; filter: brightness(0) saturate(100%) invert(14%) sepia(87%) saturate(6288%) hue-rotate(354deg) brightness(92%) contrast(110%);" alt="Stackly Logo">
+                </a>
+                <p style="margin-top: 5px;">Experience cinematic excellence with our premium streaming service.</p>
+                <div class="social-icons" style="margin-top:1rem; display:flex; gap:1rem;">
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="404.html" style="color:white; font-size:1.2rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movies.html">Movies</a></li>
+                    <li><a href="series.html">Series</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="404.html">Privacy Policy</a></li>
+                    <li><a href="404.html">Terms of Use</a></li>
+                    <li><a href="404.html">Cookie Preferences</a></li>
+                </ul>
+            </div>
+            <div class="footer-brand">
+                <h4>Newsletter</h4>
+                <p style="font-size:0.9rem;">Subscribe for the latest updates.</p>
+                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem;">
+                    <input type="email" placeholder="Email" style="flex:1; min-width:0; padding:0.5rem; border-radius:4px; border:none; background:rgba(255,255,255,0.1); color:white;">
+                    <button class="btn-primary" onclick="window.location.href='404.html'">Subscribe</button>
+                </div>
+            </div>
+        </div></div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Stackly. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Swiper Init
+            new Swiper('.trendingSwiper', {
+                slidesPerView: 'auto',
+                spaceBetween: 30,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    320: { slidesPerView: 1.5 },
+                    768: { slidesPerView: 3.5 },
+                    1024: { slidesPerView: 4.5 },
+                }
+            });
+
+            // Stagger Animations for Cards
+            gsap.utils.toArray('.movie-card, .ep-anim, .numbered-item').forEach(card => {
+                gsap.fromTo(card, 
+                    { opacity: 0, y: 50 }, 
+                    { opacity: 1, y: 0, duration: 0.8, scrollTrigger: { trigger: card, start: "top 85%" } }
+                );
+            });
+        });
+
+        // Toggle Season Accordion details
+        function toggleSeason(seasonId) {
+            const contents = [1, 2, 3];
+            contents.forEach(id => {
+                const element = document.getElementById('content-s' + id);
+                const arrow = document.getElementById('arrow-s' + id);
+                const titleSpan = document.getElementById('title-s' + id);
+
+                if (id === seasonId) {
+                    if (element.style.display === 'block') {
+                        // Close it
+                        gsap.to(element, { height: 0, opacity: 0, duration: 0.3, onComplete: () => element.style.display = 'none' });
+                        arrow.style.transform = 'rotate(0deg)';
+                        arrow.style.color = '#fff';
+                        titleSpan.style.color = '#fff';
+                    } else {
+                        // Open it
+                        element.style.display = 'block';
+                        gsap.fromTo(element, { height: 0, opacity: 0 }, { height: 'auto', opacity: 1, duration: 0.4 });
+                        arrow.style.transform = 'rotate(180deg)';
+                        arrow.style.color = 'var(--accent-red)';
+                        titleSpan.style.color = 'var(--accent-red)';
+                    }
+                } else {
+                    // Close others
+                    element.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                    arrow.style.color = '#fff';
+                    titleSpan.style.color = '#fff';
+                }
+            });
+        }
+
+        // Filter trending cards by category
+        function filterSeries(genre) {
+            // Update button styles
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Slide animate filtering
+            const slides = document.querySelectorAll('.series-card-item');
+            slides.forEach(slide => {
+                if (genre === 'all' || slide.classList.contains('genre-' + genre)) {
+                    slide.style.display = 'block';
+                    gsap.fromTo(slide, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4 });
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+        }
+
+        // Dossier Data & Interactive Loader
+        const characterDossiers = {
+            1: {
+                name: "Eleven",
+                actor: "Millie Bobby Brown",
+                quote: "\"Friends don't lie.\"",
+                img: "Images/stranger things.webp",
+                power: "95%",
+                intel: "75%",
+                influence: "88%",
+                powerBar: "95%",
+                intelBar: "75%",
+                influenceBar: "88%"
+            },
+            2: {
+                name: "Tommy Shelby",
+                actor: "Cillian Murphy",
+                quote: "\"I don't pay for suits. My suits are on the house.\"",
+                img: "Images/PEAKY BLINDERS.webp",
+                power: "90%",
+                intel: "98%",
+                influence: "95%",
+                powerBar: "90%",
+                intelBar: "98%",
+                influenceBar: "95%"
+            },
+            3: {
+                name: "Loki",
+                actor: "Tom Hiddleston",
+                quote: "\"I am burdened with glorious purpose.\"",
+                img: "Images/LOKI.webp",
+                power: "88%",
+                intel: "92%",
+                influence: "80%",
+                powerBar: "88%",
+                intelBar: "92%",
+                influenceBar: "80%"
+            },
+            4: {
+                name: "Walter White",
+                actor: "Bryan Cranston",
+                quote: "\"I am the one who knocks.\"",
+                img: "Images/BREAKING BAD.webp",
+                power: "82%",
+                intel: "99%",
+                influence: "92%",
+                powerBar: "82%",
+                intelBar: "99%",
+                influenceBar: "92%"
+            }
+        };
+
+        function loadDossier(id) {
+            const data = characterDossiers[id];
+            if (!data) return;
+
+            // Animate card content transition
+            gsap.to("#dossierImg, #dossierName, #dossierActor, #dossierQuote, [id^='stat']", {
+                opacity: 0,
+                y: -10,
+                duration: 0.2,
+                onComplete: () => {
+                    // Update content
+                    document.getElementById('dossierImg').src = data.img;
+                    document.getElementById('dossierName').textContent = data.name;
+                    document.getElementById('dossierActor').textContent = data.actor;
+                    document.getElementById('dossierQuote').textContent = data.quote;
+
+                    document.getElementById('statPowerVal').textContent = data.power;
+                    document.getElementById('statIntelVal').textContent = data.intel;
+                    document.getElementById('statInfluenceVal').textContent = data.influence;
+
+                    // Set bar widths
+                    document.getElementById('statPowerBar').style.width = data.powerBar;
+                    document.getElementById('statIntelBar').style.width = data.intelBar;
+                    document.getElementById('statInfluenceBar').style.width = data.influenceBar;
+
+                    // Animate back in
+                    gsap.fromTo("#dossierImg, #dossierName, #dossierActor, #dossierQuote, [id^='stat']", 
+                        { opacity: 0, y: 10 },
+                        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", stagger: 0.05 }
+                    );
+                }
+            });
+
+            // Update active state in avatar list
+            const avatars = document.querySelectorAll('.dossier-avatar');
+            avatars.forEach((avatar, index) => {
+                if (index + 1 === id) {
+                    avatar.classList.add('active');
+                    avatar.style.borderColor = "rgba(255,255,255,0.15)";
+                    avatar.style.background = "rgba(255,255,255,0.04)";
+                    avatar.querySelector('img').style.borderColor = "var(--accent-red)";
+                    avatar.querySelector('h4').style.color = "#fff";
+                } else {
+                    avatar.classList.remove('active');
+                    avatar.style.borderColor = "transparent";
+                    avatar.style.background = "transparent";
+                    avatar.querySelector('img').style.borderColor = "transparent";
+                    avatar.querySelector('h4').style.color = "#bbb";
+                }
+            });
+        }
+    </script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

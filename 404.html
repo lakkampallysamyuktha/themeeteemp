@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stackly · 404 Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* ── Fullscreen animated background ── */
+        .bg-wrap {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .bg-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: slowZoom 20s ease-in-out infinite alternate;
+            filter: brightness(0.35) saturate(1.2);
+        }
+
+        @keyframes slowZoom {
+            0%   { transform: scale(1)    translate(0, 0); }
+            50%  { transform: scale(1.08) translate(-1%, 0.5%); }
+            100% { transform: scale(1.12) translate(0.5%, -1%); }
+        }
+
+        /* ── Gradient overlays ── */
+        .bg-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            background:
+                radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.75) 100%),
+                linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 50%);
+        }
+
+        /* ── Red glow orbs ── */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.18;
+        }
+        .orb-1 {
+            width: 500px; height: 500px;
+            top: -150px; left: -100px;
+            background: radial-gradient(circle, #e50914, transparent 70%);
+            animation: orbDrift 14s ease-in-out infinite alternate;
+        }
+        .orb-2 {
+            width: 400px; height: 400px;
+            bottom: -150px; right: -100px;
+            background: radial-gradient(circle, #e50914, transparent 70%);
+            animation: orbDrift 18s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes orbDrift {
+            0%   { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.1); }
+        }
+
+        /* ── Centered content ── */
+        .content {
+            position: fixed;
+            inset: 0;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            color: #fff;
+        }
+
+        /* Static film grain texture overlay */
+        .content::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 404 number */
+        .err-code {
+            font-size: clamp(100px, 18vw, 200px);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -4px;
+            background: linear-gradient(135deg, #fff 30%, #e50914 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeDown 0.9s cubic-bezier(0.22,1,0.36,1) both;
+            margin-bottom: 4px;
+        }
+
+        /* Divider line */
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #e50914, transparent);
+            border-radius: 4px;
+            margin: 16px auto;
+            animation: fadeDown 0.9s 0.15s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: clamp(22px, 4vw, 36px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            animation: fadeDown 0.9s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+            margin-bottom: 16px;
+        }
+
+        /* Description */
+        .desc {
+            max-width: 480px;
+            font-size: clamp(14px, 2vw, 16px);
+            font-weight: 400;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+            animation: fadeDown 0.9s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+            margin-bottom: 36px;
+        }
+
+        /* Buttons row */
+        .btn-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeDown 0.9s 0.45s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 28px;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Primary — red fill */
+        .btn-primary {
+            background: linear-gradient(135deg, #e50914, #b80710);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(229,9,20,0.35);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 10px 32px rgba(229,9,20,0.55);
+        }
+
+        /* Secondary — ghost */
+        .btn-ghost {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.18);
+            backdrop-filter: blur(8px);
+        }
+        .btn-ghost:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: rgba(255,255,255,0.35);
+        }
+
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .btn-row { flex-direction: column; align-items: center; }
+            .btn { width: 220px; justify-content: center; }
+
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Moving background image -->
+    <div class="bg-wrap">
+        <img src="Images/stranger things.webp" alt="Background" />
+    </div>
+
+    <!-- Dark overlay -->
+    <div class="bg-overlay"></div>
+
+    <!-- Ambient red orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="err-code">404</h1>
+        <div class="divider"></div>
+        <h2 class="subtitle">Lost in Space</h2>
+        <p class="desc">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+
+        <div class="btn-row">
+            <a href="javascript:history.back()" class="btn btn-ghost">
+                <i class="fas fa-arrow-left"></i> Go Back
+            </a>
+            <a href="index.html" class="btn btn-primary">
+                <i class="fas fa-home"></i> Go to Home
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKLY · Customer Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <a href="index.html"><img src="Images/logo-removebg-preview.webp" alt="STACKLY" class="nav-logo-img" /></a>
+            <button class="sidebar-close" id="sidebarCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Main</div>
+            <a href="#" class="nav-item active" data-page="overview"><i class="fas fa-th-large"></i><span>Overview</span></a>
+            <a href="#" class="nav-item" data-page="energy"><i class="fas fa-signal"></i><span>Streaming Status</span></a>
+            <a href="#" class="nav-item" data-page="sites"><i class="fas fa-server"></i><span>Global CDNs</span></a>
+            <a href="#" class="nav-item" data-page="reports"><i class="fas fa-file-invoice"></i><span>Watchlist Reports</span></a>
+            <div class="nav-section-label">Media Resources</div>
+            <a href="#" class="nav-item" data-page="gallery"><i class="fas fa-images"></i><span>Image Stills</span></a>
+            <a href="#" class="nav-item" data-page="news"><i class="fas fa-newspaper"></i><span>Press Release</span></a>
+            <a href="#" class="nav-item" data-page="learn"><i class="fas fa-graduation-cap"></i><span>Tutorials</span></a>
+            <div class="nav-section-label">Account</div>
+            <a href="#" class="nav-item" data-page="profile"><i class="fas fa-user-circle"></i><span>My Profile</span></a>
+            <a href="#" class="nav-item" data-page="settings"><i class="fas fa-cog"></i><span>Settings</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="index.html" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+            <div class="topbar-title" id="pageTitle">Overview</div>
+        </div>
+        <div class="topbar-right">
+            <div class="topbar-actions">
+                <button class="topbar-btn" onclick="location.href='404.html'"><i class="fas fa-bell"></i></button>
+                <button class="topbar-btn" onclick="location.href='404.html'"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div class="user-info-text">
+                    <div class="user-name" id="userName">User</div>
+                    <div class="user-email" id="userEmail">user@example.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- OVERVIEW PAGE -->
+        <div class="page active" id="page-overview">
+            <div class="user-greeting">
+                <div>
+                    <h2 id="greetName">Hello, Streamer!</h2>
+                    <p id="greetEmail">user@example.com · Viewer Profile</p>
+                </div>
+                <div class="greeting-badge"><i class="fas fa-circle" style="color: #2ecc71; font-size: 0.6rem;"></i> Live System</div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="stat-card green"><i class="fas fa-play"></i><div class="stat-val">Active</div><div class="stat-lbl">Stream Status</div></div>
+                <div class="stat-card teal"><i class="fas fa-clock"></i><div class="stat-val">142 hrs</div><div class="stat-lbl">Total Watch Time</div></div>
+                <div class="stat-card lime"><i class="fas fa-tv"></i><div class="stat-val">Ultra-HD</div><div class="stat-lbl">Stream Quality</div></div>
+                <div class="stat-card sky"><i class="fas fa-heart"></i><div class="stat-val">24 items</div><div class="stat-lbl">Saved Watchlist</div></div>
+            </div>
+
+            <h3 class="section-title">Trending Media Catalog</h3>
+            <div class="img-grid">
+                <div class="img-card"><img src="Images/stranger things.webp" alt="Stranger Things"/><div class="img-overlay"><span class="img-tag">Sci-Fi</span><h4>Stranger Things</h4><p>Duration: 4 Seasons</p></div></div>
+                <div class="img-card"><img src="Images/mandalorine.webp" alt="The Mandalorian"/><div class="img-overlay"><span class="img-tag">Sci-Fi</span><h4>The Mandalorian</h4><p>Duration: 3 Seasons</p></div></div>
+                <div class="img-card"><img src="Images/LOKI.webp" alt="Loki"/><div class="img-overlay"><span class="img-tag">Action</span><h4>Loki</h4><p>Duration: 2 Seasons</p></div></div>
+                <div class="img-card"><img src="Images/BREAKING BAD.webp" alt="Breaking Bad"/><div class="img-overlay"><span class="img-tag">Crime</span><h4>Breaking Bad</h4><p>Duration: 5 Seasons</p></div></div>
+                <div class="img-card"><img src="Images/PEAKY BLINDERS.webp" alt="Peaky Blinders"/><div class="img-overlay"><span class="img-tag">Crime</span><h4>Peaky Blinders</h4><p>Duration: 6 Seasons</p></div></div>
+                <div class="img-card"><img src="Images/radha krishan.webp" alt="Radha Krishna"/><div class="img-overlay"><span class="img-tag">Mythology</span><h4>Radha Krishna</h4><p>Duration: 1 Season</p></div></div>
+            </div>
+        </div>
+
+        <!-- STREAMING STATUS PAGE -->
+        <div class="page" id="page-energy">
+            <h2 class="page-heading">Live Stream Status & Analytics</h2>
+            <div class="energy-feed" id="energyFeed"></div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-download"></i> Export Watch History Log</button>
+        </div>
+
+        <!-- GLOBAL CDNs PAGE -->
+        <div class="page" id="page-sites">
+            <h2 class="page-heading">Global Content Delivery Network (CDN)</h2>
+            <div class="map-placeholder">
+                <img src="Images/mandalorine.webp" alt="CDN Map"/>
+                <div class="map-pins">
+                    <div class="map-pin" style="top:25%; left:20%;"><i class="fas fa-server"></i><span>US-East Server</span></div>
+                    <div class="map-pin" style="top:45%; left:50%;"><i class="fas fa-server"></i><span>Europe Server</span></div>
+                    <div class="map-pin" style="top:70%; left:40%;"><i class="fas fa-server"></i><span>Asia Server</span></div>
+                    <div class="map-pin" style="top:35%; left:75%;"><i class="fas fa-server"></i><span>Japan Server</span></div>
+                </div>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-network-wired"></i> Optimize Stream Route</button>
+        </div>
+
+        <!-- WATCHLIST REPORTS PAGE -->
+        <div class="page" id="page-reports">
+            <h2 class="page-heading">Watchlist Summary Reports</h2>
+            <div class="report-list">
+                <div class="report-item"><i class="fas fa-file-alt"></i><div><strong>Monthly Streaming Analytics — June 2026</strong><p>OTT stream quality & hours log</p></div><a href="404.html" class="btn-sm">Download PDF</a></div>
+                <div class="report-item"><i class="fas fa-file-alt"></i><div><strong>Account Activity Overview</strong><p>Security & active profile sessions</p></div><a href="404.html" class="btn-sm">Download PDF</a></div>
+            </div>
+        </div>
+
+        <!-- IMAGE STILLS PAGE -->
+        <div class="page" id="page-gallery">
+            <h2 class="page-heading">Image Stills & Wallpapers</h2>
+            <div class="gallery-grid">
+                <img src="Images/stranger things.webp" alt="Stranger Things" />
+                <img src="Images/mandalorine.webp" alt="Mandalorian" />
+                <img src="Images/LOKI.webp" alt="Loki" />
+                <img src="Images/BREAKING BAD.webp" alt="Breaking Bad" />
+                <img src="Images/PEAKY BLINDERS.webp" alt="Peaky Blinders" />
+                <img src="Images/radha krishan.webp" alt="Radha Krishna" />
+            </div>
+        </div>
+
+        <!-- PRESS RELEASE PAGE -->
+        <div class="page" id="page-news">
+            <h2 class="page-heading">Stackly Streaming News</h2>
+            <div class="news-list">
+                <div class="news-card">
+                    <img src="Images/LOKI.webp" alt="Loki Poster" />
+                    <div class="news-body">
+                        <span class="news-tag">Release</span>
+                        <h4>Loki Season 2 Streaming Now</h4>
+                        <p>Join the god of mischief in the latest timelines.</p>
+                        <a href="404.html" class="news-link">Read release <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="Images/stranger things.webp" alt="Stranger Things Poster" />
+                    <div class="news-body">
+                        <span class="news-tag">Feature</span>
+                        <h4>Stranger Things Vol 2 Details</h4>
+                        <p>Get ready for the final battles in Hawkins.</p>
+                        <a href="404.html" class="news-link">Read release <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUTORIALS PAGE -->
+        <div class="page" id="page-learn">
+            <h2 class="page-heading">Streaming Tutorial Hub</h2>
+            <div class="learn-grid">
+                <div class="learn-card"><i class="fas fa-video"></i><h4>Setup UHD Video</h4><p>Configure HDR settings for smart screens.</p><a href="404.html" class="btn-sm">Start</a></div>
+                <div class="learn-card"><i class="fas fa-headphones"></i><h4>Dolby Atmos Audio</h4><p>Set up spatial sound systems.</p><a href="404.html" class="btn-sm">Start</a></div>
+                <div class="learn-card"><i class="fas fa-mobile-alt"></i><h4>Offline Watchlists</h4><p>Download titles for local playback.</p><a href="404.html" class="btn-sm">Start</a></div>
+            </div>
+        </div>
+
+        <!-- MY PROFILE PAGE -->
+        <div class="page" id="page-profile">
+            <h2 class="page-heading">My Profile</h2>
+            <div class="profile-card">
+                <div class="profile-avatar" id="profileAvatar">U</div>
+                <h3 id="profileName">User</h3>
+                <p id="profileEmail" class="profile-email">user@example.com</p>
+                <div class="profile-badge">Viewer</div>
+                <a href="404.html" class="btn-sm" style="margin-top:20px;">Edit Profile</a>
+            </div>
+        </div>
+
+        <!-- SETTINGS PAGE -->
+        <div class="page" id="page-settings">
+            <h2 class="page-heading">Settings</h2>
+            <div class="settings-list">
+                <div class="setting-row"><span>Billing details & Membership</span><a href="404.html" class="btn-sm">Configure</a></div>
+                <div class="setting-row"><span>Language & Subtitle preferences</span><a href="404.html" class="btn-sm">Configure</a></div>
+                <div class="setting-row"><span>Change Password</span><a href="404.html" class="btn-sm">Update</a></div>
+                <div class="setting-row"><span>Delete Account</span><a href="404.html" class="btn-sm danger">Cancel membership</a></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JS -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STACKLY · Admin Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <a href="index.html"><img src="Images/logo-removebg-preview.webp" alt="STACKLY" class="nav-logo-img" /></a>
+            <span class="admin-badge">Admin</span>
+            <button class="sidebar-close" id="sidebarCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section-label">Dashboard</div>
+            <a href="#" class="nav-item active" data-page="overview"><i class="fas fa-chart-pie"></i><span>Overview</span></a>
+            <a href="#" class="nav-item" data-page="metrics"><i class="fas fa-chart-line"></i><span>Stream Metrics</span></a>
+            <a href="#" class="nav-item" data-page="sites"><i class="fas fa-server"></i><span>CDN Servers</span></a>
+            <a href="#" class="nav-item" data-page="alerts"><i class="fas fa-bell"></i><span>Critical Alerts</span><span class="badge-pill" style="background:#e50914; color:#fff; font-size:0.7rem; padding: 2px 6px; border-radius:10px; margin-left:auto;">5</span></a>
+            <div class="nav-section-label">Management</div>
+            <a href="#" class="nav-item" data-page="users"><i class="fas fa-users-cog"></i><span>Staff Directory</span></a>
+            <a href="#" class="nav-item" data-page="devices"><i class="fas fa-database"></i><span>Content Assets</span></a>
+            <a href="#" class="nav-item" data-page="reports"><i class="fas fa-folder-open"></i><span>Platform Reports</span></a>
+            <a href="#" class="nav-item" data-page="billing"><i class="fas fa-file-invoice-dollar"></i><span>Sub Billing</span></a>
+            <div class="nav-section-label">System</div>
+            <a href="#" class="nav-item" data-page="logs"><i class="fas fa-terminal"></i><span>System Logs</span></a>
+            <a href="#" class="nav-item" data-page="settings"><i class="fas fa-sliders-h"></i><span>System Settings</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="index.html" class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+            <div class="topbar-title" id="pageTitle">Overview</div>
+        </div>
+        <div class="topbar-right">
+            <div class="topbar-actions">
+                <button class="topbar-btn" onclick="location.href='404.html'"><i class="fas fa-bell"></i></button>
+                <button class="topbar-btn" onclick="location.href='404.html'"><i class="fas fa-search"></i></button>
+                <button class="topbar-btn" onclick="location.href='404.html'"><i class="fas fa-plus-circle"></i></button>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">A</div>
+                <div class="user-info-text">
+                    <div class="user-name" id="userName">Admin</div>
+                    <div class="user-email" id="userEmail">admin@stackly.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- OVERVIEW PAGE -->
+        <div class="page active" id="page-overview">
+            <div class="user-greeting">
+                <div>
+                    <h2 id="greetName">Hello, Administrator!</h2>
+                    <p id="greetEmail">admin@stackly.com · Head System Admin</p>
+                </div>
+                <div class="greeting-badges">
+                    <div class="greeting-badge green"><i class="fas fa-check-circle"></i> CDN Grids Healthy</div>
+                    <div class="greeting-badge amber"><i class="fas fa-exclamation-triangle"></i> 5 Pending Alerts</div>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card"><div class="metric-icon orange"><i class="fas fa-wifi"></i></div><div class="metric-info"><div class="metric-val">34</div><div class="metric-lbl">Active CDNs</div><div class="metric-delta up"><i class="fas fa-caret-up"></i> +2 server</div></div></div>
+                <div class="metric-card"><div class="metric-icon green"><i class="fas fa-users"></i></div><div class="metric-info"><div class="metric-val">142k</div><div class="metric-lbl">Online Streams</div><div class="metric-delta up"><i class="fas fa-caret-up"></i> +12%</div></div></div>
+                <div class="metric-card"><div class="metric-icon teal"><i class="fas fa-compact-disc"></i></div><div class="metric-info"><div class="metric-val">820</div><div class="metric-lbl">Media Titles</div><div class="metric-delta neutral"><i class="fas fa-minus"></i> Stable</div></div></div>
+                <div class="metric-card"><div class="metric-icon amber"><i class="fas fa-exclamation-circle"></i></div><div class="metric-info"><div class="metric-val">5</div><div class="metric-lbl">Active Alerts</div><div class="metric-delta down"><i class="fas fa-caret-down"></i> -1 resolved</div></div></div>
+                <div class="metric-card"><div class="metric-icon purple"><i class="fas fa-users-cog"></i></div><div class="metric-info"><div class="metric-val">20</div><div class="metric-lbl">Server Operators</div><div class="metric-delta up"><i class="fas fa-caret-up"></i> +3</div></div></div>
+                <div class="metric-card"><div class="metric-icon rose"><i class="fas fa-dollar-sign"></i></div><div class="metric-info"><div class="metric-val">$18.4M</div><div class="metric-lbl">Platform Revenue</div><div class="metric-delta up"><i class="fas fa-caret-up"></i> +6.4%</div></div></div>
+            </div>
+
+            <div class="panel-row">
+                <div class="panel">
+                    <div class="panel-header"><h3>Active Traffic by Server Group</h3><a href="404.html" class="btn-sm">Full Report</a></div>
+                    <div class="chart-area" id="chartArea">Streaming Load Chart Placeholder</div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header"><h3>CDN Node Health</h3><a href="404.html" class="btn-sm">Manage</a></div>
+                    <div class="site-rows" id="siteRows">
+                        <div class="site-row"><span>US-East Streaming CDN</span><span class="status-pill on">Healthy</span></div>
+                        <div class="site-row"><span>EU-West Streaming CDN</span><span class="status-pill on">Healthy</span></div>
+                        <div class="site-row"><span>AP-South Streaming CDN</span><span class="status-pill warn">Overload</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STREAM METRICS PAGE -->
+        <div class="page" id="page-metrics">
+            <h2 class="page-heading">Platform Performance Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card"><div class="metric-icon orange"><i class="fas fa-film"></i></div><div class="metric-info"><div class="metric-val">820</div><div class="metric-lbl">Active Catalog Items</div></div></div>
+                <div class="metric-card"><div class="metric-icon green"><i class="fas fa-tv"></i></div><div class="metric-info"><div class="metric-val">1.4M hrs</div><div class="metric-lbl">Total Hours Served</div></div></div>
+                <div class="metric-card"><div class="metric-icon teal"><i class="fas fa-server"></i></div><div class="metric-info"><div class="metric-val">99.98%</div><div class="metric-lbl">Server Uptime</div></div></div>
+                <div class="metric-card"><div class="metric-icon amber"><i class="fas fa-hand-holding-usd"></i></div><div class="metric-info"><div class="metric-val">$18.4M</div><div class="metric-lbl">Sub Revenue</div></div></div>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-download"></i> Export Streaming Report</button>
+        </div>
+
+        <!-- CDN SERVERS PAGE -->
+        <div class="page" id="page-sites">
+            <h2 class="page-heading">CDN Node Server Management</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Node Server</th><th>Region</th><th>Stream Sessions</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Node US-East-1</td><td>North America</td><td>42,400</td><td><span class="status-pill on">Healthy</span></td><td><a href="404.html" class="btn-sm">Configure</a></td></tr>
+                        <tr><td>Node EU-West-2</td><td>United Kingdom</td><td>32,100</td><td><span class="status-pill on">Healthy</span></td><td><a href="404.html" class="btn-sm">Configure</a></td></tr>
+                        <tr><td>Node AP-South-1</td><td>Mumbai, India</td><td>15,900</td><td><span class="status-pill warn">Overload</span></td><td><a href="404.html" class="btn-sm">Configure</a></td></tr>
+                        <tr><td>Node LATAM-1</td><td>Brazil</td><td>8,400</td><td><span class="status-pill on">Healthy</span></td><td><a href="404.html" class="btn-sm">Configure</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-plus"></i> Add CDN Server</button>
+        </div>
+
+        <!-- CRITICAL ALERTS PAGE -->
+        <div class="page" id="page-alerts">
+            <h2 class="page-heading">System Alerts</h2>
+            <div class="alerts-list">
+                <div class="alert-card warn"><i class="fas fa-exclamation-triangle"></i><div><strong>CDN Node AP-South-1</strong><p>Streaming capacity exceeded 95% threshold.</p><span class="alert-time">10 mins ago</span></div><a href="404.html" class="btn-sm">Resolve</a></div>
+                <div class="alert-card info"><i class="fas fa-info-circle"></i><div><strong>Database Maintenance Sync</strong><p>Catalogs backed up successfully.</p><span class="alert-time">2 hrs ago</span></div><a href="404.html" class="btn-sm">Resolve</a></div>
+                <div class="alert-card error"><i class="fas fa-times-circle"></i><div><strong>Transcoder Failure Cluster B</strong><p>4K encoding streams timed out.</p><span class="alert-time">4 hrs ago</span></div><a href="404.html" class="btn-sm">Reboot Node</a></div>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-bell-slash"></i> Dismiss Non-Critical</button>
+        </div>
+
+        <!-- STAFF DIRECTORY PAGE -->
+        <div class="page" id="page-users">
+            <h2 class="page-heading">Staff & Operator Management</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Name</th><th>Email</th><th>Access Role</th><th>Status</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Siddharth V.</td><td>siddharth@stackly.com</td><td>Head Admin</td><td><span class="status-pill on">Active</span></td><td><a href="404.html" class="btn-sm">Edit</a></td></tr>
+                        <tr><td>Aria K.</td><td>aria@stackly.com</td><td>Moderator</td><td><span class="status-pill on">Active</span></td><td><a href="404.html" class="btn-sm">Edit</a></td></tr>
+                        <tr><td>Vikram R.</td><td>vikram@stackly.com</td><td>Developer Support</td><td><span class="status-pill warn">Pending</span></td><td><a href="404.html" class="btn-sm">Edit</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-user-plus"></i> Invite Staff</button>
+        </div>
+
+        <!-- CONTENT ASSETS PAGE -->
+        <div class="page" id="page-devices">
+            <h2 class="page-heading">Media Asset Catalog Database</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Asset ID</th><th>Title Name</th><th>Content Group</th><th>Encoding Node</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>AST-MOV-LOKI</td><td>Loki - Season 2</td><td>TV Series</td><td>CDN-US-East</td><td><span class="status-pill on">Online</span></td></tr>
+                        <tr><td>AST-MOV-STRG</td><td>Stranger Things 4</td><td>TV Series</td><td>CDN-EU-West</td><td><span class="status-pill on">Online</span></td></tr>
+                        <tr><td>AST-MOV-RDKR</td><td>Radha Krishna</td><td>Movies</td><td>CDN-AP-South</td><td><span class="status-pill warn">Encoding</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-plus"></i> Upload New Title</button>
+        </div>
+
+        <!-- PLATFORM REPORTS PAGE -->
+        <div class="page" id="page-reports">
+            <h2 class="page-heading">System KPI Reports</h2>
+            <div class="report-list">
+                <div class="report-item"><i class="fas fa-file-pdf"></i><div><strong>Yearly Financial Operations 2025</strong><p>Full subscriptions revenue audit.</p></div><a href="404.html" class="btn-sm">Download PDF</a></div>
+                <div class="report-item"><i class="fas fa-file-pdf"></i><div><strong>CDN Network Bandwidth Report</strong><p>Q1 bandwidth utilization overview.</p></div><a href="404.html" class="btn-sm">Download PDF</a></div>
+            </div>
+        </div>
+
+        <!-- SUB BILLING PAGE -->
+        <div class="page" id="page-billing">
+            <h2 class="page-heading">Platform Invoices & Payments</h2>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Invoice ID</th><th>Sub Account</th><th>Amount</th><th>Billing Cycle</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>INV-2026-001</td><td>Siddharth V. (Premium)</td><td>$14.99</td><td>Monthly</td><td><span class="status-pill on">Paid</span></td></tr>
+                        <tr><td>INV-2026-002</td><td>Aria K. (Premium)</td><td>$14.99</td><td>Monthly</td><td><span class="status-pill on">Paid</span></td></tr>
+                        <tr><td>INV-2026-003</td><td>Vikram R. (Basic)</td><td>$9.99</td><td>Monthly</td><td><span class="status-pill warn">Overdue</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-dollar-sign"></i> View Financial ledger</button>
+        </div>
+
+        <!-- SYSTEM LOGS PAGE -->
+        <div class="page" id="page-logs">
+            <h2 class="page-heading">Live System Server Terminal</h2>
+            <div class="log-terminal" id="logTerminal"></div>
+            <button class="page-btn" onclick="location.href='404.html'"><i class="fas fa-download"></i> Save Log Dump</button>
+        </div>
+
+        <!-- SYSTEM SETTINGS PAGE -->
+        <div class="page" id="page-settings">
+            <h2 class="page-heading">Streaming Server Configurations</h2>
+            <div class="settings-list">
+                <div class="setting-row"><span>Transcoder Bitrate Rules</span><a href="404.html" class="btn-sm">Configure</a></div>
+                <div class="setting-row"><span>Geo-blocking & Licensing Nodes</span><a href="404.html" class="btn-sm">Configure</a></div>
+                <div class="setting-row"><span>Security Certificates (SSL/DRM)</span><a href="404.html" class="btn-sm">Manage</a></div>
+                <div class="setting-row"><span>Danger Zone</span><a href="404.html" class="btn-sm danger">Wipe Cache</a></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JS -->
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
