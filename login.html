@@ -231,6 +231,7 @@
         .input-wrap input,
         .input-wrap select {
             width: 100%;
+            max-width: 100%;
             padding: 13px 44px 13px 44px;
             background: var(--color-surface);
             border: 1px solid var(--color-border);
@@ -240,6 +241,9 @@
             font-size: 14px;
             transition: var(--tr);
             outline: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
         .input-wrap select {
             cursor: pointer;
@@ -509,8 +513,8 @@
                         <i class="fas fa-tv"></i>
                         <select id="roleSelect" required>
                             <option value="">Select role</option>
-                            <option value="viewer">Customer – View OTT Dashboard</option>
-                            <option value="admin">Admin – Full Stream management access</option>
+                            <option value="viewer">Customer – OTT Dashboard</option>
+                            <option value="admin">Admin – Full Access</option>
                         </select>
                     </div>
                 </div>
