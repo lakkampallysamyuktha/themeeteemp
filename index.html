@@ -669,6 +669,13 @@
     <!-- 3. Popular Categories -->
     <section class="categories-section" style="background: var(--bg-color-light); padding: 5rem 0;">
         <h2 class="section-title">Popular Categories</h2>
+        <style>
+            @media (min-width: 1024px) {
+                .categories-grid {
+                    grid-template-columns: repeat(5, 1fr) !important;
+                }
+            }
+        </style>
         <div class="container categories-grid">
             <div class="category-card" onclick="window.location.href='404.html'" style="background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.7)), url('Images/ironman.webp') center/cover;">
                 <h3>Action</h3>
