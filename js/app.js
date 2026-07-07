@@ -732,3 +732,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Newsletter validation
+window.validateNewsletter = function(e, form) {
+    e.preventDefault();
+    const emailInput = form.querySelector('input[type="email"]');
+    let msg = form.querySelector('.newsletter-msg');
+    
+    // Create msg element if it doesn't exist
+    if (!msg) {
+        msg = document.createElement('div');
+        msg.className = 'newsletter-msg';
+        msg.style.position = 'absolute';
+        msg.style.top = '100%';
+        msg.style.left = '0';
+        msg.style.fontSize = '12px';
+        msg.style.marginTop = '4px';
+        msg.style.display = 'none';
+        form.appendChild(msg);
+    }
+
+    const email = emailInput.value.trim();
+    
+    if (!email || !email.includes('@') || !email.includes('.')) {
+        msg.textContent = 'Please enter a valid email address.';
+        msg.style.color = '#ff4d4d';
+        msg.style.display = 'block';
+    } else {
+        msg.textContent = 'Subscribed successfully!';
+        msg.style.color = '#2ecc71';
+        msg.style.display = 'block';
+        emailInput.value = '';
+        setTimeout(() => {
+            msg.style.display = 'none';
+        }, 3000);
+    }
+};
