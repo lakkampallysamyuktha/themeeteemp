@@ -124,54 +124,71 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const isMobileView = window.innerWidth <= 991;
-            const heroThumbSwiper = new Swiper('.heroThumbSwiper', {
-                slidesPerView: 'auto',
-                spaceBetween: 15,
-                watchSlidesProgress: true,
-                slideToClickedSlide: true,
-                loop: true,
-                autoplay: isMobileView ? false : {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                navigation: {
-                    nextEl: '.custom-hero-arrow.next',
-                    prevEl: '.custom-hero-arrow.prev',
-                }
-            });
-
+            
             if (isMobileView) {
+                // Completely disable slider on mobile - show a single static slide (Godzilla, index 2)
+                const thumbMedia = document.querySelector('.hero-right-media');
+                if (thumbMedia) thumbMedia.style.display = 'none';
+
                 setTimeout(() => {
-                    heroThumbSwiper.slideToLoop(2, 0);
+                    heroBgSwiper.slideTo(2, 0);
+                    heroContentSwiper.slideTo(2, 0);
+
+                    // GSAP text entry reveal for the static slide
+                    const activeSlide = heroContentSwiper.slides[2];
+                    if (activeSlide) {
+                        const elements = Array.from(activeSlide.querySelectorAll('.hero-anim'));
+                        gsap.fromTo(elements, 
+                            { y: 30, opacity: 0 },
+                            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+                        );
+                    }
                 }, 50);
-            }
-
-            // Synchronize Content, Background and Thumbnails
-            heroThumbSwiper.on('slideChange', function() {
-                const activeIndex = heroThumbSwiper.realIndex % 5;
-                heroBgSwiper.slideTo(activeIndex);
-                heroContentSwiper.slideTo(activeIndex);
-
-                // Add active outline to thumb slide
-                document.querySelectorAll('.hero-thumb-slide').forEach((slide, idx) => {
-                    const slideIndex = parseInt(slide.getAttribute('data-swiper-slide-index') || idx);
-                    if ((slideIndex % 5) === activeIndex) {
-                        slide.classList.add('swiper-slide-thumb-active');
-                    } else {
-                        slide.classList.remove('swiper-slide-thumb-active');
+            } else {
+                // Initialize the thumbnail slider as normal on desktop
+                const heroThumbSwiper = new Swiper('.heroThumbSwiper', {
+                    slidesPerView: 'auto',
+                    spaceBetween: 15,
+                    watchSlidesProgress: true,
+                    slideToClickedSlide: true,
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    navigation: {
+                        nextEl: '.custom-hero-arrow.next',
+                        prevEl: '.custom-hero-arrow.prev',
                     }
                 });
 
-                // GSAP text entry reveal
-                const activeSlide = heroContentSwiper.slides[activeIndex];
-                if (activeSlide) {
-                    const elements = Array.from(activeSlide.querySelectorAll('.hero-anim'));
-                    gsap.fromTo(elements, 
-                        { y: 30, opacity: 0 },
-                        { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
-                    );
-                }
-            });
+                // Synchronize Content, Background and Thumbnails
+                heroThumbSwiper.on('slideChange', function() {
+                    const activeIndex = heroThumbSwiper.realIndex % 5;
+                    heroBgSwiper.slideTo(activeIndex);
+                    heroContentSwiper.slideTo(activeIndex);
+
+                    // Add active outline to thumb slide
+                    document.querySelectorAll('.hero-thumb-slide').forEach((slide, idx) => {
+                        const slideIndex = parseInt(slide.getAttribute('data-swiper-slide-index') || idx);
+                        if ((slideIndex % 5) === activeIndex) {
+                            slide.classList.add('swiper-slide-thumb-active');
+                        } else {
+                            slide.classList.remove('swiper-slide-thumb-active');
+                        }
+                    });
+
+                    // GSAP text entry reveal
+                    const activeSlide = heroContentSwiper.slides[activeIndex];
+                    if (activeSlide) {
+                        const elements = Array.from(activeSlide.querySelectorAll('.hero-anim'));
+                        gsap.fromTo(elements, 
+                            { y: 30, opacity: 0 },
+                            { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out' }
+                        );
+                    }
+                });
+            }
         }
 
         // Featured Showcase Swipers
