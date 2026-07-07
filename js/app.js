@@ -12,6 +12,13 @@ window.addEventListener('load', () => {
     }
 });
 
+// Force refresh when navigating back
+window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     // 0. Swiper Init (moved from index.html)
     if (typeof Swiper !== 'undefined') {
