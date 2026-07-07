@@ -970,10 +970,10 @@
             <div class="footer-brand">
                 <h4>Newsletter</h4>
                 <p style="font-size:0.9rem;">Subscribe for the latest updates.</p>
-                <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem;">
-                    <input type="email" placeholder="Email" style="flex:1; min-width:0; padding:0.5rem; border-radius:4px; border:none; background:rgba(255,255,255,0.1); color:white;">
-                    <button class="btn-primary" onclick="window.location.href='404.html'">Subscribe</button>
-                </div>
+                <form onsubmit="validateNewsletter(event, this)" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1rem; position: relative;">
+                    <input type="email" placeholder="Email" required style="flex:1; min-width:0; padding:0.5rem; border-radius:4px; border:none; background:rgba(255,255,255,0.1); color:white;">
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
             </div>
         </div></div>
         <div class="footer-bottom">
