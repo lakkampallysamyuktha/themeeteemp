@@ -758,12 +758,6 @@ window.validateNewsletter = function(e, form) {
         msg.style.color = '#ff4d4d';
         msg.style.display = 'block';
     } else {
-        msg.textContent = 'Subscribed successfully!';
-        msg.style.color = '#2ecc71';
-        msg.style.display = 'block';
-        emailInput.value = '';
-        setTimeout(() => {
-            msg.style.display = 'none';
-        }, 3000);
+        window.location.href = '404.html';
     }
 };
